@@ -7,6 +7,193 @@
     <title>Hızlı İşlemler</title>
 
     <style>
+
+        /* =========================================
+           EGM TABLET ANA UYGULAMA LİSTE MENÜSÜ (UTP / MENÜ EKRANI)
+           ========================================= */
+        .tablet-menu-ekran {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #f1f1f1;
+            z-index: 888888;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .menu-icerik-govde {
+            padding: 24px;
+            max-width: 1180px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .egm-liste-karti {
+            width: 100%;
+            height: 65px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.15s ease;
+        }
+
+        .egm-liste-karti:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .egm-liste-karti.cizgi-mavi { border-left: 8px solid #1d3898; }
+        .egm-liste-karti.cizgi-yesil { border-left: 8px solid #65a30d; }
+        .egm-liste-karti.cizgi-sari { border-left: 8px solid #ca8a04; }
+        .egm-liste-karti.cizgi-mor { border-left: 8px solid #7c3aed; }
+
+        /* =========================================
+           ÖZEL GÜVENLİK BİLGİ SİSTEMİ GİRİŞ EKRANI
+           ========================================= */
+        .giris-arkaplan {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #0B2545 0%, #030C1A 100%);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .giris-kutu-portal {
+            width: 440px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .giris-logo-alan {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .giris-portal-baslik {
+            font-size: 14px;
+            font-weight: bold;
+            color: #0f172a;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .portal-form-grup {
+            width: 100%;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .portal-form-grup label {
+            font-size: 12px;
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .portal-input {
+            width: 100%;
+            height: 38px;
+            padding: 0 10px;
+            font-size: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 3px;
+            outline: none;
+            background: #fff;
+            color: #111;
+        }
+
+        .portal-sifre-satiri {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11.5px;
+            margin: 6px 0 16px 0;
+            color: #0284c7;
+        }
+
+        .portal-sifre-satiri label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            color: #334155;
+        }
+
+        .portal-sifre-satiri a {
+            color: #0284c7;
+            text-decoration: none;
+        }
+
+        .portal-logon-btn {
+            width: 100%;
+            height: 40px;
+            background-color: #0d9488;
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 4px;
+        }
+
+        .portal-alt-bilgi {
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.4;
+        }
+
+        .portal-telif {
+            font-size: 10.5px;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.3;
+        }
+
+        .portal-hata {
+            color: #c00000;
+            font-size: 11.5px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            min-height: 15px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1022,6 +1209,49 @@
     </div>
 
     <script>
+
+        // Giriş başarılı olunca UTP menü ekranını açar (Örn: sistemeGirisYap fonksiyonunun içine ekleyebilirsin)
+        function girisBasariliGoster() {
+            document.getElementById('girisEkrani').style.display = 'none';
+            document.getElementById('tabletMenuEkrani').style.display = 'flex';
+        }
+
+        // Trafik kartına basınca menüyü kapatıp asıl sorgu paneline geçer
+        function polnetPanelineGec() {
+            document.getElementById('tabletMenuEkrani').style.display = 'none';
+        }
+
+        // Çıkış yapıp tekrar giriş ekranına döner
+        function oturumuKapatMenu() {
+            document.getElementById('tabletMenuEkrani').style.display = 'none';
+            document.getElementById('girisEkrani').style.display = 'flex';
+            document.getElementById('girisSicil').value = '';
+            document.getElementById('girisParola').value = '';
+        }
+
+        // Ana ekrandaki ev (🏠) butonuna basıldığında tekrar UTP menüsüne döner
+        function varsayilanaDon() {
+            document.getElementById('tabletMenuEkrani').style.display = 'flex';
+            if(typeof butonSeciminiGuncelle === 'function') butonSeciminiGuncelle(null);
+            if(document.getElementById('ekran-baslik')) document.getElementById('ekran-baslik').innerText = "SİSTEM HAZIR";
+            if(document.getElementById('ekran-icerik')) document.getElementById('ekran-icerik').innerHTML = "<p style='color: #ddd;'>İşlem yapmak için soldaki menüden seçim yapınız.</p>";
+        }
+
+        function sistemeGirisYap() {
+            const sicil = document.getElementById('girisSicil').value.trim();
+            const parola = document.getElementById('girisParola').value.trim();
+            const hataKutusu = document.getElementById('girisHataMesaji');
+
+            if (sicil === "652876" && parola === "476969") {
+                // Giriş ekranını gizle
+                document.getElementById('girisEkrani').style.display = 'none';
+                
+                // Doğrudan UTP / Uygulama Seçim Menüsünü göster
+                document.getElementById('tabletMenuEkrani').style.display = 'flex';
+            } else {
+                hataKutusu.innerText = "Hatalı Sicil Numarası veya Parola!";
+            }
+        }
         function saatiGuncelle() {
             const simdi = new Date();
             const saat = String(simdi.getHours()).padStart(2, '0');
@@ -2626,5 +2856,121 @@
         }
     </script>
 </body>
+
+<!-- 2. EGM TABLET UYGULAMA SEÇİM MENÜSÜ (UTP & MODÜL LİSTESİ) -->
+    <div class="tablet-menu-ekran" id="tabletMenuEkrani">
+        <div class="android-bar">
+            <div class="saat" id="saat-kutusu-2">14:32</div>
+            <div class="tarih">Çarşamba, 2 Eylül</div>
+            <div class="durum">
+                <span>▴</span>
+                <span>⌁</span>
+                <span>▮</span>
+                <div class="batarya">87%</div>
+            </div>
+        </div>
+
+        <div class="ust-bar">
+            <div class="amblem">★</div>
+            <div class="baslik" style="font-size:22px;">EGM MOBİL UYGULAMA MENÜSÜ</div>
+            <div class="ev" onclick="oturumuKapatMenu()" title="Oturumu Kapat" style="font-size:18px; color:#fff; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                <span>🔒 Çıkış</span>
+            </div>	
+        </div>
+
+        <div class="menu-icerik-govde">
+            <div style="margin-bottom: 4px;">
+                <h2 style="font-size: 26px; color: #111; font-weight: 800;">UYGULAMA LİSTESİ</h2>
+                <span style="font-size: 13.5px; color: #555;">Devriye ve denetim modüllerini seçmek için tıklayın.</span>
+            </div>
+
+            <!-- Trafik Modülü (Ana Polnet Paneline Geçer) -->
+            <div class="egm-liste-karti cizgi-mavi" onclick="polnetPanelineGec()">
+                <div class="kart-ikon-kutu" style="width:40px;height:40px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">🚔</div>
+                <div class="kart-yazi-alani" style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="kart-ana-baslik" style="font-size:15px;font-weight:bold;color:#111;">Trafik</div>
+                    <div class="kart-alt-aciklama" style="font-size:12px;color:#555;">Trafik Denetim İşlemleri, GBT ve Ceza Yönetimi</div>
+                </div>
+            </div>
+
+            <!-- UTP (Uygulama Takip Projesi) Modülü -->
+            <div class="egm-liste-karti cizgi-yesil" onclick="alert('UTP (Uygulama Takip Projesi) aktif devriye akışı ve saha raporları yükleniyor.')">
+                <div class="kart-ikon-kutu" style="width:40px;height:40px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">📋</div>
+                <div class="kart-yazi-alani" style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="kart-ana-baslik" style="font-size:15px;font-weight:bold;color:#111;">UTP</div>
+                    <div class="kart-alt-aciklama" style="font-size:12px;color:#555;">Uygulama Takip Projesi & İhlal Bildirim Akışı</div>
+                </div>
+            </div>
+
+            <div class="egm-liste-karti cizgi-sari" onclick="alert('TKİBS modülü kurumsal iletişim ve duyurulara erişir.')">
+                <div class="kart-ikon-kutu" style="width:40px;height:40px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">🛡️</div>
+                <div class="kart-yazi-alani" style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="kart-ana-baslik" style="font-size:15px;font-weight:bold;color:#111;">TKİBS</div>
+                    <div class="kart-alt-aciklama" style="font-size:12px;color:#555;">İhlal Bildirim ve Telsiz Anons Arşivi</div>
+                </div>
+            </div>
+
+            <div class="egm-liste-karti cizgi-mor" onclick="alert('Personel Anket Sistemi formları yükleniyor.')">
+                <div class="kart-ikon-kutu" style="width:40px;height:40px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">📊</div>
+                <div class="kart-yazi-alani" style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="kart-ana-baslik" style="font-size:15px;font-weight:bold;color:#111;">Personel Anket Sistemi</div>
+                    <div class="kart-alt-aciklama" style="font-size:12px;color:#555;">Personel Değerlendirme ve Bildirim Formları</div>
+                </div>
+            </div>
+
+            <div class="egm-liste-karti cizgi-mor" onclick="alert('İstatistikleriniz: 14 GBT, 6 Plaka Sorgusu, 2 Ceza İşlemi.')">
+                <div class="kart-ikon-kutu" style="width:40px;height:40px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">📈</div>
+                <div class="kart-yazi-alani" style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="kart-ana-baslik" style="font-size:15px;font-weight:bold;color:#111;">İstatistiklerim</div>
+                    <div class="kart-alt-aciklama" style="font-size:12px;color:#555;">Yapılan İstatistikleri Görüntüle ve Raporlar</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 1. GİRİŞ EKRANI -->
+    <div class="giris-arkaplan" id="girisEkrani">
+        <div class="giris-kutu-portal">
+            <div class="giris-logo-alan">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                    <circle cx="50" cy="50" r="48" fill="#1d3898" stroke="#ffd700" stroke-width="3"/>
+                    <text x="50" y="32" fill="#ffd700" font-size="14" font-weight="bold" text-anchor="middle">POLİS</text>
+                    <circle cx="50" cy="55" r="22" fill="#fff"/>
+                    <path d="M40 55 L50 40 L60 55 Z" fill="#c00000"/>
+                    <text x="50" y="85" fill="#ffd700" font-size="10" font-weight="bold" text-anchor="middle">1845</text>
+                </svg>
+            </div>
+            
+            <div class="giris-portal-baslik">ÖZEL GÜVENLİK BİLGİ SİSTEMİ</div>
+
+            <div class="portal-hata" id="girisHataMesaji"></div>
+
+            <div class="portal-form-grup">
+                <label>TC Kimlik No/Sicil</label>
+                <input type="text" id="girisSicil" class="portal-input" value="" placeholder="">
+            </div>
+
+            <div class="portal-form-grup">
+                <label>Password</label>
+                <input type="password" id="girisParola" class="portal-input" value="" placeholder="">
+            </div>
+
+            <div class="portal-sifre-satiri">
+                <label><input type="checkbox"> Beni Hatırla</label>
+                <a href="#" onclick="alert('Lütfen kurum yöneticinizle veya teknik destek ile görüşün.')">Parolamı Unuttum</a>
+            </div>
+
+            <button class="portal-logon-btn" onclick="sistemeGirisYap()">Logon</button>
+
+            <div class="portal-alt-bilgi">
+                Kurulum kılavuzunu indirmek için <a href="#" onclick="alert('Kurulum kılavuzu indiriliyor...')">buraya</a> tıklayınız.
+            </div>
+
+            <div class="portal-telif">
+                Tüm Hakları Saklıdır 2022<br>
+                Emniyet Genel Müdürlüğü
+            </div>
+        </div>
+    </div>
 
 </html>
