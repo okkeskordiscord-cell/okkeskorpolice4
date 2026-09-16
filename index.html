@@ -1210,6 +1210,74 @@
 
     <script>
 
+        // UTP (Uygulama Takip Projesi) Saha Denetim Paneli
+        function utpPanelineGec() {
+            // Tablet menü ekranını kapatıp ana Pol-Net / Hızlı İşlemler ekranına geçer
+            document.getElementById('tabletMenuEkrani').style.display = 'none';
+            
+            // Başlığı ve alanı UTP Saha Denetim Modülü olarak ayarla
+            document.getElementById('ekran-baslik').innerText = "UTP - SAHA DENETİM VE UYGULAMA TAKİP PROJESİ";
+            
+            document.getElementById('ekran-icerik').innerHTML = `
+                <div class="kurumsal-kart">
+                    <div class="kart-ust-bar">
+                        <div>
+                            <span style="font-size:15px; font-weight:bold; color:#1d3898;">AKTİF İL GENELİ YOL UYGULAMA VE NOKTALARI</span><br>
+                            <span style="font-size:11px; color:#64748b;">SEKTÖR: AVRUPA YAKASI | OPERASYONEL DURUM: KRİTİK DENETİM</span>
+                        </div>
+                        <span class="rozet-yesil">CANLI AKIŞ AKTİF</span>
+                    </div>
+
+                    <table class="tablo-kurumsal">
+                        <thead>
+                            <tr>
+                                <th>Nokta Kodu</th>
+                                <th>Lokasyon / Güzergah</th>
+                                <th>Sorumlu Ekip</th>
+                                <th>Durdurulan / GBT</th>
+                                <th>Durum</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>NKT-3401</strong></td>
+                                <td>Basın Ekspres Yolu Sektör 4 Kontrol Noktası</td>
+                                <td>34-A-14 (Asayiş / Trafik)</td>
+                                <td>42 Araç / 118 Şahıs</td>
+                                <td><span style="color:#138808; font-weight:bold;">Aktif Uygulama</span></td>
+                                <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="alert('NKT-3401 kontrol noktasına takviye ekip ve GPS konumu gönderildi.')">DETAY</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>NKT-3402</strong></td>
+                                <td>TEM Otoyolu İkitelli Gişeler Çıkışı</td>
+                                <td>34-B-08 (Trafik Denetleme)</td>
+                                <td>89 Araç / 210 Şahıs</td>
+                                <td><span style="color:#138808; font-weight:bold;">Aktif Uygulama</span></td>
+                                <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="alert('NKT-3402 noktası KGYS kameraları ile senkronize edildi.')">DETAY</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>NKT-3403</strong></td>
+                                <td>E-5 Karayolu Küçükçekmece Sapağı</td>
+                                <td>34-C-22 (Yunus Timleri)</td>
+                                <td>31 Araç / 84 Şahıs</td>
+                                <td><span style="color:#d97706; font-weight:bold;">Geçici Durduruldu</span></td>
+                                <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="alert('NKT-3403 noktası devriye turu için aktifleştiriliyor.')">AKTİFLEŞTİR</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; border-top:1px solid #e2e8f0; padding-top:12px;">
+                        <span style="font-size:11.5px; color:#64748b;">Saha Koordinasyon Merkezi İletişim: <strong>Dahili 4421</strong></span>
+                        <div style="display:flex; gap:8px;">
+                            <button class="aksiyon-btn" style="background:#1d3898;" onclick="alert('Yeni uygulama noktası oluşturma paneli açılıyor.')">+ YENİ NOKTA TANIMLA</button>
+                            <button class="aksiyon-btn" style="background:#c00000;" onclick="alert('İl geneli acil asayiş alarm durumu Komuta Merkezine bildirildi!')">🚨 İL GENELİ ALARM</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // Giriş başarılı olunca UTP menü ekranını açar (Örn: sistemeGirisYap fonksiyonunun içine ekleyebilirsin)
         function girisBasariliGoster() {
             document.getElementById('girisEkrani').style.display = 'none';
@@ -1354,6 +1422,111 @@
         silahRuhsati: "SİLAHLI",
         pasaport: "UMUMA MAHSUS (Bordo) - Geçerli"
     },
+"25244707102": {
+                tc: "25244707102",
+                ad: "ÖYKÜ",
+                soyad: "DUMAN",
+                babaAdi: "CANER",
+                anaAdi: "EMEL",
+                dogumYeri: "BAHÇELİEVLER / İSTANBUL",
+                dogumTarihi: "23.01.2007",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "KADIN",
+                nufusIl: "İSTANBUL",
+                nufusIlce: "BAĞCILAR",
+                ciltNo: "-",
+                aileSiraNo: "310",
+                bireySiraNo: "66",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-25244707",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.7 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "BAĞCILAR / İSTANBUL",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
+"10280538018": {
+                tc: "10280538018",
+                ad: "TUNAHAN",
+                soyad: "ŞAHİN",
+                babaAdi: "ÜMİT HABİB",
+                anaAdi: "CANAN",
+                dogumYeri: "BAHÇELİEVLER / İSTANBUL",
+                dogumTarihi: "28.01.2006",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "ERKEK",
+                nufusIl: "TOKAT",
+                nufusIlce: "NİKSAR",
+                ciltNo: "-",
+                aileSiraNo: "91",
+                bireySiraNo: "16",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-10280538",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.8 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "BAKIRKÖY / İSTANBUL",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
+"27820969980": {
+                tc: "27820969980",
+                ad: "SUDE",
+                soyad: "BÜYÜKBÜBEROĞLU",
+                babaAdi: "ZAFER MURAT",
+                anaAdi: "SEVDA",
+                dogumYeri: "GÜNGÖREN / İSTANBUL",
+                dogumTarihi: "06.01.2006",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "KADIN",
+                nufusIl: "KAYSERİ",
+                nufusIlce: "MELİKGAZİ",
+                ciltNo: "-",
+                aileSiraNo: "467",
+                bireySiraNo: "55",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-27820969",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.7 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "GÜNGÖREN / İSTANBUL (GSM: 5322955329)",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
 "16778816194": {
         tc: "16778816194",
         ad: "SEÇİL",
@@ -1391,9 +1564,9 @@
     },
 "38506577146": {
         tc: "38506577146",
-        ad: "MUHAMMED ENES",
-        soyad: "YEŞİL",
-        babaAdi: "NEVZAT",
+        ad: "ENES",
+        soyad: "SARAL",
+        babaAdi: "TOLGA",
         anaAdi: "GÜLER",
         dogumYeri: "BAĞCILAR / İSTANBUL",
         dogumTarihi: "09.06.2003",
@@ -1401,7 +1574,7 @@
         din: "İSLAM",
         cinsiyet: "ERKEK",
         nufusIl: "İSTANBUL",
-        nufusIlce: "BAĞCILAR",
+        nufusIlce: "BAKIRKÖY",
         ciltNo: "0015",
         aileSiraNo: "0090",
         bireySiraNo: "05",
@@ -1417,13 +1590,48 @@
         ehliyet: "B Sınıfı Sürücü Belgesi (Aktif / Geçerli)",
         uavtAdres: "Bağcılar Mah. İstanbul Cad. No: 42 Bağcılar / İSTANBUL",
         adli: {
-            durum: "TEMİZ (ARANTI YOK)",
+            durum: "ARANTI MEVCUT",
             rozetClass: "rozet-yesil",
-            icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın aranma kaydı, tahdit veya yakalama emri bulunmamaktadır."
+            icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın aranma kaydı MEVCUT"
         },
         silahRuhsati: "YOK",
         pasaport: "UMUMA MAHSUS (Bordo) - Geçerli"
     },
+    "47170288692": {
+                tc: "47170288692",
+                ad: "ECRİN",
+                soyad: "ELYİĞİT",
+                babaAdi: "MURAT",
+                anaAdi: "AYŞE",
+                dogumYeri: "BAĞCILAR / İSTANBUL",
+                dogumTarihi: "25.05.2006",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "KADIN",
+                nufusIl: "VAN",
+                nufusIlce: "TUŞBA",
+                ciltNo: "-",
+                aileSiraNo: "2",
+                bireySiraNo: "162",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-47170288",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.7 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "BEYLİKDÜZÜ / İSTANBUL (GSM: 5365869216)",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
 "11457149440": {
         tc: "11457149440",
         ad: "AYŞE İREM",
@@ -1635,6 +1843,147 @@
         silahRuhsati: "YOK",
         pasaport: "UMUMA MAHSUS (Bordo) - Geçerli"
     },
+"11339363582": {
+                tc: "11339363582",
+                ad: "MEHMET ALİ",
+                soyad: "TARİ",
+                babaAdi: "MEHMET",
+                anaAdi: "EDA",
+                dogumYeri: "BAKIRKÖY / İSTANBUL",
+                dogumTarihi: "10.11.2005",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "ERKEK",
+                nufusIl: "MALATYA",
+                nufusIlce: "PÜTÜRGE",
+                ciltNo: "-",
+                aileSiraNo: "44",
+                bireySiraNo: "90",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-11339363",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.8 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "BAKIRKÖY / İSTANBUL",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
+            
+    "20534190206": {
+                tc: "20534190206",
+                ad: "YUNUS",
+                soyad: "NAJİM",
+                babaAdi: "AYET",
+                anaAdi: "ŞANLI",
+                dogumYeri: "GÜNGÖREN / İSTANBUL",
+                dogumTarihi: "19.08.2005",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "ERKEK",
+                nufusIl: "İSTANBUL",
+                nufusIlce: "KADIKÖY",
+                ciltNo: "-",
+                aileSiraNo: "6497",
+                bireySiraNo: "11",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-20534190",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.8 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "BEYLİKDÜZÜ / İSTANBUL",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
+            "65695167780": {
+                tc: "65695167780",
+                ad: "HATİCE",
+                soyad: "TÜRK",
+                babaAdi: "ŞEVKET",
+                anaAdi: "GÜLÜZAR",
+                dogumYeri: "NİKSAR",
+                dogumTarihi: "14.09.1964",
+                medeniHal: "EVLİ",
+                din: "İSLAM",
+                cinsiyet: "KADIN",
+                nufusIl: "BAYBURT",
+                nufusIlce: "MERKEZ",
+                ciltNo: "-",
+                aileSiraNo: "43",
+                bireySiraNo: "182",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-65695167",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.6 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "ESENYURT / İSTANBUL (GSM: 5453096412)",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
+            "29707907078": {
+                tc: "29707907078",
+                ad: "YUNUS EMRE",
+                soyad: "GENÇER",
+                babaAdi: "ÖMER",
+                anaAdi: "MERYEM",
+                dogumYeri: "BAĞCILAR",
+                dogumTarihi: "08.08.2006",
+                medeniHal: "BEKÂR",
+                din: "İSLAM",
+                cinsiyet: "ERKEK",
+                nufusIl: "BAYBURT",
+                nufusIlce: "AYDINTEPE",
+                ciltNo: "-",
+                aileSiraNo: "35",
+                bireySiraNo: "102",
+                kanGrubu: "BİLİNMİYOR",
+                boyKilo: "BİLİNMİYOR",
+                foto: "profil.jpg",
+                biyometrik: {
+                    parmakIziKodu: "AFIS-TR-29707907",
+                    retinaKaydi: "MEVCUT (Sürüm 4.1)",
+                    yuzTanimaOrani: "%99.8 Doğrulandı",
+                    dnaProfili: "ARŞİVDE MEVCUT DEĞİL"
+                },
+                ehliyet: "Sürücü Belgesi Bulunmuyor",
+                uavtAdres: "BAĞCILAR / İSTANBUL",
+                adli: {
+                    durum: "TEMİZ (SABIKASIZ)",
+                    rozetClass: "rozet-yesil",
+                    icerik: "UYAP Adli Sicil ve Asayiş GBT Kaydı: Şahsın adli sicil ve adli arşiv kaydı TEMİZDİR. Herhangi bir aranma, mahkeme celbi, yakalama veya idari tahdit kaydı bulunmamaktadır."
+                },
+                silahRuhsati: "YOK",
+                pasaport: "Kayıt Bulunmuyor"
+            },
 "Murat Türk": {
         tc: "65392297766",
         ad: "MURAT",
@@ -2894,7 +3243,7 @@
             </div>
 
             <!-- UTP (Uygulama Takip Projesi) Modülü -->
-            <div class="egm-liste-karti cizgi-yesil" onclick="alert('UTP (Uygulama Takip Projesi) aktif devriye akışı ve saha raporları yükleniyor.')">
+            <div class="egm-liste-karti cizgi-yesil" onclick="utpPanelineGec()">
                 <div class="kart-ikon-kutu" style="width:40px;height:40px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">📋</div>
                 <div class="kart-yazi-alani" style="display:flex;flex-direction:column;gap:2px;">
                     <div class="kart-ana-baslik" style="font-size:15px;font-weight:bold;color:#111;">UTP</div>
@@ -2960,7 +3309,7 @@
                 <a href="#" onclick="alert('Lütfen kurum yöneticinizle veya teknik destek ile görüşün.')">Parolamı Unuttum</a>
             </div>
 
-            <button class="portal-logon-btn" onclick="sistemeGirisYap()">Logon</button>
+            <button class="portal-logon-btn" onclick="sistemeGirisYap()">Giriş Yap</button>
 
             <div class="portal-alt-bilgi">
                 Kurulum kılavuzunu indirmek için <a href="#" onclick="alert('Kurulum kılavuzu indiriliyor...')">buraya</a> tıklayınız.
