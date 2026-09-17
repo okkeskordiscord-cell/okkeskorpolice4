@@ -90,8 +90,8 @@
         }
 
         .giris-logo-alan {
-            width: 80px;
-            height: 80px;
+            width: 205px;
+            height: 205px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
@@ -357,16 +357,19 @@
         }
 
         .kirmizi {
-            background-color: #e00000;
-        }
+    background-color: #e00000;
+    height: 90px; /* Buraya istediğin yüksekliği verebilirsin (Örn: 80px, 100px vb.) */
+}
 
         .kirmizi:hover {
             background-color: #f00000;
         }
 
         .gri {
-            background-color: #929292;
-        }
+    background-color: #a0a0a0;
+    height: 90px; /* Buraya istediğin yüksekliği verebilirsin (Örn: 80px, 100px vb.) */
+}
+
 
         .gri:hover {
             background-color: #a0a0a0;
@@ -387,7 +390,7 @@
             height: 575px;
             background-color: #727272;
             padding: 24px;
-            color: #ffffff;
+            color: #fffff;
             border-radius: 0px;
             box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
             overflow-y: auto;
@@ -1284,14 +1287,18 @@
             <div class="butonlar">
                 <button class="buton" id="btn-vatandas" onclick="panelGoster('vatandas', this)">VATANDAŞ SORGULAMA</button>
                 <button class="buton" id="btn-arac" onclick="panelGoster('arac', this)">ARAÇ SORGULAMA</button>
+<!-- DİĞER BUTONLARLA AYNI BOYUT VE YAPIDA BEYAZ ARAMA KUTUSU -->
+<div style="width: 229px; height: 52px; background-color: #ffffff; border: 2px solid #1d3898; display: flex; align-items: center; justify-content: center; margin: 2.5px 0; border-radius: 0px; box-sizing: border-box; padding: 0 10px;">
+    <input type="text" id="akilli-input" placeholder="" style="width: 100%; border: none; outline: none; background: transparent; font-size: 14px; font-weight: bold; text-align: center; text-transform: uppercase; color: #111;" autocomplete="off" oninput="akilliSorgula(this.value)">
+</div>
                 <button class="buton kirmizi" id="btn-ceza" onclick="panelGoster('ceza', this)">CEZA OLUŞTUR</button>
                 <button class="buton gri" id="btn-tutanak" onclick="panelGoster('tutanak', this)">TUTANAKLAR</button>
                 <button class="buton" onclick="metinGoster('ARAÇ FOTOĞRAFLARI', 'Kamera kayıt sunucusunda aktif dosya bulunamadı.', this)">ARAÇ FOTOĞRAFLARI</button>
                 <button class="buton" onclick="metinGoster('RAPORLAR', 'Günlük devriye kayıtları arşivlendi.', this)">RAPORLAR</button>
                 <button class="buton" onclick="metinGoster('PDF OLUŞTUR', 'Hazırlanan form PDF baskısına aktarılmaya hazır.', this)">PDF OLUŞTUR</button>
-                <button class="buton" onclick="metinGoster('KONUM TAKİP', 'GPS Sinyali Alındı: Sektör 4 / Cadde 12.', this)">KONUM TAKİP</button>
-                <button class="buton" id="btn-bildirim" onclick="panelGoster('bildirimler', this)">BİLDİRİMLER</button>
-                <button class="buton" id="btn-ayar" onclick="panelGoster('ayarlar', this)">AYARLAR</button>
+<button class="buton" id="btn-bildirim" onclick="panelGoster('bildirimler', this)">BİLDİRİMLER</button>
+                                <button class="buton" id="btn-ayar" onclick="panelGoster('ayarlar', this)">AYARLAR</button>
+
             </div>
 
             <div class="gri-cerceve" id="gri-alan">
@@ -1407,10 +1414,9 @@
 
         // Ana ekrandaki ev (🏠) butonuna basıldığında tekrar UTP menüsüne döner
         function varsayilanaDon() {
-            document.getElementById('tabletMenuEkrani').style.display = 'flex';
-            if(typeof butonSeciminiGuncelle === 'function') butonSeciminiGuncelle(null);
-            if(document.getElementById('ekran-baslik')) document.getElementById('ekran-baslik').innerText = "SİSTEM HAZIR";
-            if(document.getElementById('ekran-icerik')) document.getElementById('ekran-icerik').innerHTML = "<p style='color: #ddd;'>İşlem yapmak için soldaki menüden seçim yapınız.</p>";
+            butonSeciminiGuncelle(null);
+            document.getElementById('ekran-baslik').innerText = ""; // Başlık yazısı kaldırıldı
+            document.getElementById('ekran-icerik').innerHTML = ""; // İçerik tamamen boşaltıldı
         }
 
         function sistemeGirisYap() {
@@ -1418,7 +1424,7 @@
             const parola = document.getElementById('girisParola').value.trim();
             const hataKutusu = document.getElementById('girisHataMesaji');
 
-            if (sicil === "652876" && parola === "476969") {
+            if (sicil === "652876" , "00" && parola === "476969" , "111111" , "343434" , "00") {
                 // Giriş ekranını gizle
                 document.getElementById('girisEkrani').style.display = 'none';
                 
@@ -2847,22 +2853,93 @@
         };
 
         const polnetAraclar = {
-            "34EGM01": {
+            "34PGV319": {
                 ulke: "TR",
-                marka: "VOLKSWAGEN",
-                model: "Passat 2.0 TDI BlueMotion",
-                yil: "2021",
-                renk: "BEYAZ",
-                yakit: "Dizel",
-                sasi: "WVWZZZ3CZME048192",
-                motor: "DFG492014",
-                sahip: "EMNİYET GENEL MÜDÜRLÜĞÜ (Resmî Hizmet)",
-                tescilTarihi: "12.04.2021",
+                marka: "BMW",
+                model: "i4 M Sport eDrive40",
+                yil: "2025",
+                renk: "Siyah",
+                yakit: "Elektrik",
+                sasi: "WBA73AW08SF987654",
+                motor: "ELEKTRIK-MOT-2025",
+                sahip: "T.C. TİCARET BAKANLIĞI (Resmî Tahsisli Makam)",
+                tescilTarihi: "01.06.2025",
+                tescilSube: "İstanbul Trafik Tescil Şube Md.",
+                kullanim: "Resmî Hizmete Mahsus / Tahsisli Makam Aracı",
+                sigorta: { 
+                    durum: "GEÇERLİ", 
+                    bitis: "01.06.2027", 
+                    sirket: "Allianz Sigorta" 
+                },
+                muayene: { 
+                    durum: "GEÇERLİ", 
+                    bitis: "01.06.2027" 
+                },
+                hukuki: { 
+                    men: false, 
+                    calinti: false, 
+                    haciz: false, 
+                    not: "T.C. Ticaret Bakanlığı merkez teşkilatı resmi tahsisli makam aracı kaydı aktiftir. Geçiş üstünlüğü ve koruma şerhleri işlidir." 
+                }
+            },
+"34HAN848": {
+                ulke: "TR",
+                marka: "BMW",
+                model: "420i M Sport Coupe",
+                yil: "2022",
+                renk: "SİYAH",
+                yakit: "Benzin",
+                sasi: "WBA4Z5C00NF849123",
+                motor: "B48B20A918",
+                sahip: "TUNAHAN ŞAHİN (TC: 348*****10)",
+                tescilTarihi: "21.08.2022",
+                tescilSube: "İstanbul Üsküdar Tescil Büro Md.",
+                kullanim: "Hususi Otomobil (M1)",
+                sigorta: { 
+                    durum: "GEÇERLİ", 
+                    bitis: "21.08.2027", 
+                    sirket: "Allianz Sigorta" 
+                },
+                muayene: { 
+                    durum: "GEÇERLİ", 
+                    bitis: "10.08.2027" 
+                },
+                hukuki: { 
+                    men: false, 
+                    calinti: false, 
+                    haciz: false, 
+                    not: "Araç sicil kaydı tamamen temizdir. Herhangi bir tahsis, şerh, haciz veya arama kaydı bulunmamaktadır." 
+                }
+            },
+
+"34FB3756": {
+                ulke: "TR",
+                marka: "LAND ROVER",
+                model: "Range Rover Sport 3.0 SDV6 HSE",
+                yil: "2019",
+                renk: "SİYAH",
+                yakit: "Benzinli",
+                sasi: "SALWA2V4XKA109842",
+                motor: "SDV6-30-9182",
+                sahip: "AK PARTİ GENEL MERKEZİ (Resmî Tahsisli Makam)",
+                tescilTarihi: "14.05.2026",
                 tescilSube: "Ankara Trafik Tescil Şube Md.",
-                kullanim: "Resmî Hizmete Mahsus Araç",
-                sigorta: { durum: "GEÇERLİ", bitis: "12.04.2027", sirket: "Türkiye Sigorta" },
-                muayene: { durum: "GEÇERLİ", bitis: "09.03.2027" },
-                hukuki: { men: false, calinti: false, haciz: false, not: "Resmî Koruma ve Devriye Aracı." }
+                kullanim: "Resmî Kurum / Siyasi Parti Tahsisli Makam Aracı",
+                sigorta: { 
+                    durum: "GEÇERLİ", 
+                    bitis: "14.05.2027", 
+                    sirket: "Anadolu Sigorta" 
+                },
+                muayene: { 
+                    durum: "GEÇERLİ", 
+                    bitis: "04.05.2027" 
+                },
+                hukuki: { 
+                    men: false, 
+                    calinti: false, 
+                    haciz: false, 
+                    not: "AK Parti Genel Merkez Teşkilatı koruma ve tahsisli makam kaydı aktiftir. Emniyet geçiş üstünlüğü protokol şerhleri işlidir." 
+                }
             },
             "34ABC789": {
                 ulke: "TR",
@@ -2985,38 +3062,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><strong>TR-849102</strong></td>
-                                    <td>02.09.2026 14:10</td>
-                                    <td>34 PGV 319</td>
-                                    <td>KTK 51/2-c (Hız Sınırını %50'den Fazla Aşmak)</td>
-                                    <td><strong style="color:#c00000;">9.267,00 TL</strong></td>
-                                    <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="ornekTutanakGoster('34 PGV 319', 'Madde 51/2-c - Hız sınırlarını %50\'den fazla aşmak (Aşırı Hız)', '9.267,00 TL', 'TR-849102')">GÖRÜNTÜLE</button></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TR-730194</strong></td>
-                                    <td>02.09.2026 13:25</td>
-                                    <td>06 KOR 44</td>
-                                    <td>KTK 91 (Zorunlu Mali Sorumluluk Sigortası Bulunmamak)</td>
-                                    <td><strong style="color:#c00000;">993,00 TL + MEN</strong></td>
-                                    <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="ornekTutanakGoster('06 KOR 44', 'Madde 91 - Zorunlu Trafik Sigortası Yaptırmamak', '993,00 TL', 'TR-730194')">GÖRÜNTÜLE</button></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TR-619482</strong></td>
-                                    <td>02.09.2026 11:50</td>
-                                    <td>25553696944 (Ömer Türk)</td>
-                                    <td>Rutin Genel Asayiş ve GBT Denetimi</td>
-                                    <td><span style="color:#138808; font-weight:bold;">KUSURSUZ (TEMİZ)</span></td>
-                                    <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="alert('Rutin kontrol tutanağı: Aranma kaydı bulunmamaktadır.')">GÖRÜNTÜLE</button></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TR-518290</strong></td>
-                                    <td>02.09.2026 09:15</td>
-                                    <td>34 ABC 102</td>
-                                    <td>KTK 78/1-a (Emniyet Kemeri Takmamak)</td>
-                                    <td><strong style="color:#c00000;">993,00 TL</strong></td>
-                                    <td><button class="gri-btn" style="padding:4px 10px; font-size:11px;" onclick="ornekTutanakGoster('34 ABC 102', 'Madde 78/1-a - Emniyet kemeri bulundurulması zorunlu araçlarda takmamak', '993,00 TL', 'TR-518290')">GÖRÜNTÜLE</button></td>
-                                </tr>
+                          
                             </tbody>
                         </table>
                         
@@ -3667,6 +3713,102 @@
         function pdfKapat() {
             document.getElementById('pdfModal').style.display = 'none';
         }
+
+function akilliSorgula(deger) {
+    let metin = deger.trim();
+    const sonucAlani = document.getElementById('panel-sonuc');
+    
+    // Eğer girilen metin 11 haneli rakamsa VATANDAŞ (MERNİS) GBT sorgula
+    if (/^\d{11}$/.test(metin)) {
+        vatandasSorgulaOtomatik(metin);
+    } 
+    // Eğer girilen metin en az 5 karakterse ve harf içeriyorsa PLAKA sorgula
+    else if (metin.length >= 5 && /[A-Z]/i.test(metin)) {
+        sorgulaPlakaDisaridan(metin.toUpperCase());
+    }
+    // Eşleşme yoksa alanı temizle
+    else if (metin.length === 0) {
+        if (sonucAlani) sonucAlani.innerHTML = "";
+    }
+}
+
+// Otomatik Vatandaş GBT Getirme
+async function vatandasSorgulaOtomatik(tc) {
+    const sonucAlani = document.getElementById('panel-sonuc');
+    
+    // Önce yerel veritabanında (mernisVatandaslar) var mı diye bakıyoruz
+    let kisi = mernisVatandaslar[tc];
+
+    if (!kisi) {
+        // Yoksa sunucuya (backend SQLite veritabanına) API isteği atıyoruz
+        try {
+            const response = await fetch(`/api/sorgula/${tc}`);
+            const data = await response.json();
+            if (data.success) {
+                sonucAlani.innerHTML = `
+                    <div class="vatandas-karti" style="background:#fff; color:#111; padding:15px; border-radius:4px; border-top:4px solid #1d3898; margin-top:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #eee; padding-bottom:8px; margin-bottom:10px;">
+                            <strong style="font-size:15px; color:#1d3898;">VATANDAŞ GBT SONUCU: ${data.tc}</strong>
+                            <span class="rozet-yesil">KAYIT AKTİF</span>
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <tr><td style="padding:5px; font-weight:bold; color:#444; width:25%;">Ad Soyad:</td><td style="padding:5px; font-weight:bold;">${data.ad} ${data.soyad}</td></tr>
+                            <tr><td style="padding:5px; font-weight:bold; color:#444;">Anne / Baba Adı:</td><td style="padding:5px;">${data.anaadi} / ${data.babaadi}</td></tr>
+                            <tr><td style="padding:5px; font-weight:bold; color:#444;">Doğum Yeri / Tarihi:</td><td style="padding:5px;">${data.dogumyeri} / ${data.dogumtarihi}</td></tr>
+                            <tr><td style="padding:5px; font-weight:bold; color:#444;">Kayıtlı Adres:</td><td style="padding:5px;">${data.adres}</td></tr>
+                        </table>
+                    </div>
+                `;
+                return;
+            } else {
+                sonucAlani.innerHTML = `<div style="color:#ffcccc; margin-top:10px; font-weight:bold; background:#727272; padding:10px;">${data.message}</div>`;
+                return;
+            }
+        } catch (err) {
+            console.error(err);
+            return;
+        }
+    }
+
+    // Eğer yerel hafızadaysa direkt ekrana bas
+    sonucAlani.innerHTML = `
+        <div class="vatandas-karti" style="background:#fff; color:#111; padding:15px; border-radius:4px; border-top:4px solid #1d3898; margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #eee; padding-bottom:8px; margin-bottom:10px;">
+                <strong style="font-size:15px; color:#1d3898;">VATANDAŞ GBT SONUCU: ${kisi.tc}</strong>
+                <span class="rozet-yesil">${kisi.adli.durum}</span>
+            </div>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <tr><td style="padding:5px; font-weight:bold; color:#444; width:25%;">Ad Soyad:</td><td style="padding:5px; font-weight:bold;">${kisi.ad} ${kisi.soyad}</td></tr>
+                <tr><td style="padding:5px; font-weight:bold; color:#444;">Anne / Baba Adı:</td><td style="padding:5px;">${kisi.anaAdi} / ${kisi.babaAdi}</td></tr>
+                <tr><td style="padding:5px; font-weight:bold; color:#444;">Doğum Yeri / Tarihi:</td><td style="padding:5px;">${kisi.dogumYeri} / ${kisi.dogumTarihi}</td></tr>
+                <tr><td style="padding:5px; font-weight:bold; color:#444;">Kayıtlı Adres:</td><td style="padding:5px;">${kisi.uavtAdres}</td></tr>
+            </table>
+        </div>
+    `;
+}
+
+// Otomatik Araç / Plaka Getirme
+function sorgulaPlakaDisaridan(plaka) {
+    const sonucAlani = document.getElementById('panel-sonuc');
+    let arac = polnetAraclar[plaka] || {
+        marka: "RENAULT", model: "Megane Sedan", yil: "2023", sahip: "AHMET YILMAZ", sasi: "VF1RFB...", hukuki: { not: "Kayıt temiz, tahkikat yok." }
+    };
+
+    sonucAlani.innerHTML = `
+        <div class="arac-karti" style="background:#fff; color:#111; padding:15px; border-radius:4px; border-top:4px solid #1d3898; margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #eee; padding-bottom:8px; margin-bottom:10px;">
+                <strong style="font-size:15px; color:#1d3898;">PLAKA SORGULAMA: ${plaka}</strong>
+                <span class="rozet-yesil">AKTİF TESCİL</span>
+            </div>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <tr><td style="padding:5px; font-weight:bold; color:#444; width:25%;">Marka / Model:</td><td style="padding:5px;">${arac.marka} - ${arac.model} (${arac.yil})</td></tr>
+                <tr><td style="padding:5px; font-weight:bold; color:#444;">Ruhsat Sahibi:</td><td style="padding:5px;">${arac.sahip}</td></tr>
+                <tr><td style="padding:5px; font-weight:bold; color:#444;">Şasi Numarası:</td><td style="padding:5px; font-family:monospace;">${arac.sasi}</td></tr>
+                <tr><td style="padding:5px; font-weight:bold; color:#444;">Tahkikat Notu:</td><td style="padding:5px; color:#138808; font-weight:bold;">${arac.hukuki.not}</td></tr>
+            </table>
+        </div>
+    `;
+}
     </script>
 </body>
 
@@ -3749,29 +3891,30 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Logo_of_General_Directorate_of_Security_%28Turkey%29.svg?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
 </div>
             
-            <div class="giris-portal-baslik">ÖZEL GÜVENLİK BİLGİ SİSTEMİ</div>
+            <div class="giris-portal-baslik">
+    EMNİYET GENEL MÜDÜRLÜĞÜ <br> ÖZEL GÜVENLİK BİLGİ SİSTEMİ
+</div>
 
             <div class="portal-hata" id="girisHataMesaji"></div>
 
             <div class="portal-form-grup">
-                <label>TC Kimlik No/Sicil</label>
+                <label style="color: #2ecc71;">TC Kimlik No/Sicil</label>
                 <input type="text" id="girisSicil" class="portal-input" value="" placeholder="">
             </div>
 
             <div class="portal-form-grup">
-                <label>Password</label>
+                <label style="color: #2ecc71;">Password</label>
                 <input type="password" id="girisParola" class="portal-input" value="" placeholder="">
             </div>
 
             <div class="portal-sifre-satiri">
-                <label><input type="checkbox"> Beni Hatırla</label>
-                <a href="#" onclick="alert('Lütfen kurum yöneticinizle veya teknik destek ile görüşün.')">Parolamı Unuttum</a>
+                <label style="color: #2ecc71;">Parolamı Unuttum</label>
             </div>
 
-            <button class="portal-logon-btn" onclick="sistemeGirisYap()">Giriş Yap</button>
+            <button class="portal-logon-btn" onclick="sistemeGirisYap()">Logon</button>
 
             <div class="portal-alt-bilgi">
-                Kurulum kılavuzunu indirmek için <a href="#" onclick="alert('Kurulum kılavuzu indiriliyor...')">buraya</a> tıklayınız.
+                Kurulum kılavuzunu indirmek için <a href="https://ozelguvenlik.egm.gov.tr/kullanim_kilavuzu.pdf" target="_blank">buraya</a> tıklayınız.
             </div>
 
             <div class="portal-telif">
