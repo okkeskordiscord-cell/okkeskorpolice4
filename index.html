@@ -3,10 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
     <title>Hızlı İşlemler</title>
 
     <style>
+
+/* YENİ CEZA SEÇİM BUTONLARI (SOL MENÜ STİLİNDE) */
+        .ceza-secim-konteyner {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            max-width: 450px;
+        }
+
+        .ceza-secim-kutu {
+            width: 100%;
+            height: 52px;
+            background-color: #1d3898;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0px;
+            transition: background-color 0.15s ease;
+        }
+
+        .ceza-secim-kutu:hover {
+            background-color: #2445b3;
+        }
+
+        .ceza-secim-ikon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .ceza-secim-baslik {
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
 
         /* =========================================
            EGM TABLET ANA UYGULAMA LİSTE MENÜSÜ (UTP / MENÜ EKRANI)
@@ -202,7 +243,7 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #f1f1f1;
+            background-color: #e2e2e2;
             color: #111;
             overflow: hidden;
             height: 100vh;
@@ -261,7 +302,7 @@
         .ust-bar {
             width: 100%;
             height: 76px;
-            background-color: #1d3898;
+            background-color: #0f225e;
             border-bottom: 2px solid #b8c3d9;
             display: flex;
             align-items: center;
@@ -343,7 +384,7 @@
             width: 229px;
             height: 52px;
             border: none;
-            background-color: #1d3898;
+            background-color: #0f225e;
             color: white;
             font-size: 15px;
             font-weight: bold;
@@ -353,7 +394,7 @@
         }
 
         .buton:hover {
-            background-color: #2445b3;
+            background-color: #173280;
         }
 
         .kirmizi {
@@ -385,15 +426,17 @@
            GRİ ÇERÇEVE ALANI
            ========================================= */
         .gri-cerceve {
+flex: 1;
             width: 82%;
             max-width: 1180px;
-            height: 575px;
-            background-color: #727272;
+            height: calc(100vh - 90px);
+            background-color: #ffffff;
             padding: 24px;
             color: #fffff;
             border-radius: 0px;
             box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
             overflow-y: auto;
+margin-top: -45px;
         }
 
         .ekran-baslik {
@@ -863,7 +906,7 @@
         .sorgu-etiket {
             font-size: 12px;
             font-weight: bold;
-            color: #f1f1f1;
+            color: #000000;
             letter-spacing: 0.3px;
         }
 
@@ -1249,6 +1292,7 @@
     </div>
 
     <script>
+
         // Taskbar saatinin çalışması için eklenen küçük fonksiyon
         function taskbarSaatiniGuncelle() {
             const simdi = new Date();
@@ -1323,6 +1367,69 @@
     </div>
 
     <script>
+
+function aracSorgulamaPaneliYukle() {
+            const baslik = document.getElementById('ekran-baslik');
+            const icerik = document.getElementById('ekran-icerik');
+            if (baslik) baslik.innerText = "ARAÇ SORGULAMA İŞLEMİ";
+
+            if (icerik) {
+                icerik.innerHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 14px; max-width: 650px;">
+                        <div style="font-size: 14px; font-weight: bold; color: #111; margin-bottom: 2px;">Sorgulama Yöntemi Seçiniz:</div>
+                        
+                        <button style="background-color: #0f225e; color: #ffffff; padding: 16px 20px; font-size: 15px; font-weight: bold; border: none; border-radius: 6px; text-align: left; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;" onclick="aracAltFormAc('plaka')">
+                            1. Tescil Plakası ile Sorgulama
+                        </button>
+
+                        <button style="background-color: #0f225e; color: #ffffff; padding: 16px 20px; font-size: 15px; font-weight: bold; border: none; border-radius: 6px; text-align: left; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;" onclick="aracAltFormAc('tc')">
+                            2. T.C. Kimlik Numarası ile Sorgulama
+                        </button>
+
+                        <button style="background-color: #0f225e; color: #ffffff; padding: 16px 20px; font-size: 15px; font-weight: bold; border: none; border-radius: 6px; text-align: left; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;" onclick="aracAltFormAc('karekod')">
+                            3. Karekod ile Sorgulama
+                        </button>
+                    </div>
+                    <div id="arac-alt-sonuc" style="margin-top: 20px;"></div>
+                `;
+            }
+        }
+
+        function aracAltFormAc(tur) {
+            const sonucDiv = document.getElementById('arac-alt-sonuc');
+            if (!sonucDiv) return;
+
+            if (tur === 'plaka') {
+                sonucDiv.innerHTML = `
+                    <div style="background: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 6px; max-width: 650px;">
+                        <strong>Plaka ile Sorgulama:</strong>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <input type="text" id="sorgu-plaka-input" placeholder="Örn: 34ABC123" style="flex: 1; padding: 10px; font-weight: bold; text-transform: uppercase; border: 1px solid #ccc; border-radius: 4px;">
+                            <button style="background: #0f225e; color: #fff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer;" onclick="alert('Plaka sorgulama başlatıldı.')">Sorgula</button>
+                        </div>
+                    </div>
+                `;
+            } else if (tur === 'tc') {
+                sonucDiv.innerHTML = `
+                    <div style="background: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 6px; max-width: 650px;">
+                        <strong>T.C. Kimlik Numarası ile Sorgulama:</strong>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <input type="text" maxlength="11" id="sorgu-tc-input" placeholder="11 Hane T.C. Kimlik No" style="flex: 1; padding: 10px; font-weight: bold; border: 1px solid #ccc; border-radius: 4px;">
+                            <button style="background: #0f225e; color: #fff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer;" onclick="alert('T.C. ile araç sorgulama başlatıldı.')">Sorgula</button>
+                        </div>
+                    </div>
+                `;
+            } else if (tur === 'karekod') {
+                sonucDiv.innerHTML = `
+                    <div style="background: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 6px; max-width: 650px; text-align: center;">
+                        <strong>Karekod Okuyucu / Kamera Aktif</strong>
+                        <div style="margin: 15px auto; width: 180px; height: 180px; border: 2px dashed #0f225e; display: flex; align-items: center; justify-content: center; background: #f9f9f9; color: #555; font-size: 13px; font-weight: bold;">
+                            [ KAREKOD TARANIYOR ]
+                        </div>
+                    </div>
+                `;
+            }
+        }
 
         // UTP (Uygulama Takip Projesi) Saha Denetim Paneli
         function utpPanelineGec() {
@@ -2806,48 +2913,132 @@
 
         const cezaVeritabani = {
             "--- TÜRK CEZA KANUNU (TCK) ADLİ TRAFİK SUÇLARI ---": [
-                { metin: "TCK Madde 179/1 - Trafik işaret ve levhalarını bozma/yola engel koyma", tutar: 0, adli: "1 Yıldan 6 Yıla Kadar Hapis Cezası + Adli Para Cezası", puan: 20 },
-                { metin: "TCK Madde 179/2 - Trafik güvenliğini kasten tehlikeye sokma (Tehlikeli Sürüş)", tutar: 0, adli: "3 Aydan 2 Yıla Kadar Hapis Cezası (Mahkeme Sevk)", puan: 20 },
-                { metin: "TCK Madde 179/3 - Alkol (1.00 Promil Üzeri) veya Uyuşturucu ile Araç Kullanmak", tutar: 9267, adli: "2 Yıla Kadar Hapis Cezası + 6 Ay Ehliyete El Koyma", puan: 20 },
+                { metin: "TCK Madde 179/1 - Trafik işaret ve levhalarını bozma/yola engel koyma", tutar: 0, adli: "1 Yıldan 6 Yıla Kadar Hapis Cezası + Adli Para", puan: 20 },
+                { metin: "TCK Madde 179/2 - Trafik güvenliğini kasten tehlikeye sokma (Tehlikeli Sürüş / Drift)", tutar: 0, adli: "3 Aydan 2 Yıla Kadar Hapis (Mahkeme Sevk)", puan: 20 },
+                { metin: "TCK Madde 179/3 - Alkol (1.00 Promil Üzeri) veya Uyuşturucu ile Araç Kullanmak", tutar: 9267, adli: "2 Yıla Kadar Hapis + 6 Ay Ehliyete El Koyma", puan: 20 },
                 { metin: "TCK Madde 180 - Trafik ve ulaşım güvenliğini taksirle tehlikeye sokma", tutar: 0, adli: "3 Aydan 3 Yıla Kadar Hapis Cezası", puan: 15 },
-                { metin: "TCK Madde 204/1 - Resmî belgede sahtecilik (Sahte Plaka/Ruhsat/Ehliyet Düzenlemek)", tutar: 46392, adli: "2 Yıldan 5 Yıla Kadar Hapis Cezası", puan: 20 },
-                { metin: "TCK Madde 85/1 - Taksirle ölüme neden olma (Ölümlü Trafik Kazası)", tutar: 0, adli: "2 Yıldan 6 Yıla Kadar Hapis (Savcılık Doğrudan Sevk)", puan: 20 },
-                { metin: "TCK Madde 89/1 - Taksirle yaralamaya neden olma (Yaralamalı Trafik Kazası)", tutar: 0, adli: "3 Aydan 1 Yıla Kadar Hapis / Adli Para Cezası", puan: 15 },
-                { metin: "TCK Madde 152/1-a - Kamu malına veya trafik denetleme altyapısına zarar verme", tutar: 0, adli: "1 Yıldan 4 Yıla Kadar Hapis + Hasar Tazmini", puan: 15 }
+                { metin: "TCK Madde 204/1 - Resmî belgede sahtecilik (Sahte Plaka / Ruhsat / Ehliyet)", tutar: 46392, adli: "2 Yıldan 5 Yıla Kadar Hapis Cezası", puan: 20 },
+                { metin: "TCK Madde 85/1 - Taksirle ölüme neden olma (Ölümlü Trafik Kazası)", tutar: 0, adli: "2 Yıldan 6 Yıla Kadar Hapis (Savcılık Sevk)", puan: 20 },
+                { metin: "TCK Madde 89/1 - Taksirle yaralamaya neden olma (Yaralamalı Trafik Kazası)", tutar: 0, adli: "3 Aydan 1 Yıla Kadar Hapis / Adli Para", puan: 15 },
+                { metin: "TCK Madde 152/1-a - Kamu malına veya KGYS / EDS altyapısına zarar verme", tutar: 0, adli: "1 Yıldan 4 Yıla Kadar Hapis + Hasar Tazmini", puan: 15 }
             ],
-            "--- KARAYOLLARI TRAFİK KANUNU (KTK) İDARİ VE ADLİ MADDELER ---": [
-                { metin: "Madde 23/3-a - Tescil plakasını monte edilmesi gereken yerin dışına takmak", tutar: 993, adli: "Yok (İdari Para Cezası)", puan: 10 },
-                { metin: "Madde 23/3-b - Plakanın okunmasını engelleyecek şekilde değişiklik yapmak/vida/kaplama", tutar: 3260, adli: "Yok (Plaka Düzeltene Kadar Men)", puan: 15 },
+            "--- KTK MADDE 20 - 40: TESCİL, PLAKA VE BELGE İŞLEMLERİ ---": [
+                { metin: "Madde 20/1-a - Araç tescil belgesini araçta bulundurmamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 20/1-b - Tescil belgesini ve plakayı devir tarihinden itibaren 1 saat içinde tescil ettirmemek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 21/1 - Tescilsiz aracı karayolunda trafiğe çıkarmak", tutar: 9267, adli: "Trafikten Men + Otopark", puan: 20 },
+                { metin: "Madde 23/3-a - Tescil plakasını monte edilmesi gereken yerin dışına (cam önüne vb.) takmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 23/3-b - Plakanın okunmasını engelleyecek şekilde kirli, harf/sayı silinmiş veya vida atılmış olması", tutar: 3260, adli: "Plaka Düzeltene Kadar Men", puan: 15 },
                 { metin: "Madde 23/3-c - Plakasız araç kullanmak", tutar: 10930, adli: "Trafikten Men", puan: 20 },
-                { metin: "Madde 23/4 - Başka araca tescilli sahte veya ikiz plaka takmak/kullanmak", tutar: 46392, adli: "TCK 204 Sevk + Araç Trafikten Men", puan: 20 },
+                { metin: "Madde 23/4 - Başka araca tescilli sahte veya ikiz plaka takmak/kullanmak", tutar: 46392, adli: "TCK 204 Sevk + Araç Men", puan: 20 },
+                { metin: "Madde 24 - Tescilli aracı plakasız veya başka tescil plakasıyla kullanmak", tutar: 18679, adli: "Araç Trafikten Men", puan: 20 },
+                { metin: "Madde 25 - Araç üzerinde yapılan teknik değişiklikleri 30 gün içinde tescil kuruluşuna bildirmemek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 26/1 - İzin almadan araçlarda renk veya teknik değişiklik yapmak", tutar: 993, adli: "Men ve Uygunluk Şartı", puan: 10 },
                 { metin: "Madde 26/2 - Mevzuata aykırı çakar lamba, tepe lambası veya siren sistemi kullanmak", tutar: 9267, adli: "Cihaz Müsaderesi + 30 Gün Men", puan: 20 },
-                { metin: "Madde 30/1-a - Görüşü engelleyecek aksesuar, koyu renkli cam filmi kullanmak", tutar: 2167, adli: "Süre Verilerek İhtar", puan: 10 },
-                { metin: "Madde 30/1-b - Bozuk far, stop, sinyal donanımıyla araç kullanmak", tutar: 993, adli: "Yok", puan: 10 },
-                { metin: "Madde 32/3 - Mevzuata aykırı abartı egzoz kullanarak çevreyi rahatsız etmek", tutar: 9267, adli: "Araç Egzoz Düzelene Kadar Men", puan: 20 },
-                { metin: "Madde 34/a - Muayene süresi geçmiş araçla trafiğe çıkmak", tutar: 2167, adli: "7 Gün İzinli Men", puan: 10 },
-                { metin: "Madde 36/3-a - Sürücü belgesiz (ehliyetsiz) motorlu araç kullanmak", tutar: 18679, adli: "Araç Sahibine de Aynı Tutar Ceza", puan: 20 },
-                { metin: "Madde 36/3-b - Mahkeme veya yetkililerce sürücü belgesi geri alınmışken araç kullanmak", tutar: 18679, adli: "Adli Tahkikat", puan: 20 },
-                { metin: "Madde 39/1-a - Sürücü belgesi sınıfına uygun olmayan motorlu araç kullanmak", tutar: 9267, adli: "Yok", puan: 20 },
-                { metin: "Madde 46/2-d - Tehlikeli tarzda art arda birden fazla şerit değiştirmek (Makas atmak)", tutar: 9267, adli: "Trafik Güvenliğini Tehlikeye Sokmaktan Sevk", puan: 20 },
-                { metin: "Madde 46/2-f - Otoyollarda emniyet şeridini gereksiz/izinsiz kullanmak", tutar: 9267, adli: "Yok", puan: 20 },
-                { metin: "Madde 46/2-g - Ters yönde araç sürmek", tutar: 9267, adli: "Trafikten Men Riski", puan: 20 },
+                { metin: "Madde 28 - Yönetmeliğe aykırı ses, müzik, görüntü ve haberleşme cihazı takmak", tutar: 993, adli: "Cihazın Sökülmesi", puan: 10 },
+                { metin: "Madde 30/1-a - Görüşü engelleyecek aksesuar, koyu renkli cam filmi veya renkli cam kullanmak", tutar: 2167, adli: "Süre Verilerek İhtar", puan: 10 },
+                { metin: "Madde 30/1-b - Bozuk far, patlak stop, çalışmayan sinyal donanımıyla gece trafiğe çıkmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 30/1-c - Lastikleri diş derinliği yetersiz veya kabzları kopmuş şekilde kullanmak", tutar: 2167, adli: "Güvenli Alana Sevke Kadar Men", puan: 15 },
+                { metin: "Madde 31/1-a - Kış lastiği zorunluluğuna uymamak (Ticari Araçlar)", tutar: 4514, adli: "Seferden Men", puan: 10 },
+                { metin: "Madde 32/3 - Mevzuata aykırı abartı egzoz (gürültülü egzoz) kullanarak çevreyi rahatsız etmek", tutar: 9267, adli: "Egzoz Düzeltilene Kadar Men", puan: 20 },
+                { metin: "Madde 34/a - Muayene süresi geçmiş araçla trafiğe çıkmak (1. Defa)", tutar: 2167, adli: "7 Gün İzinli Men", puan: 10 },
+                { metin: "Madde 34/b - Muayene süresi geçmiş araçla trafiğe çıkmak (Tekrarlı / 2. Defa)", tutar: 4514, adli: "Araç Trafikten Men", puan: 15 },
+                { metin: "Madde 35 - Karayolu yapısına zarar verecek ağırlıkta veya boyutta yükle çıkmak", tutar: 9267, adli: "Yük İndirme / Seferden Men", puan: 20 },
+                { metin: "Madde 36/3-a - Sürücü belgesiz (ehliyetsiz) motorlu araç kullanmak", tutar: 18679, adli: "Araç Sahibine de Aynı Tutar", puan: 20 },
+                { metin: "Madde 36/3-b - Mahkeme veya yetkililerce sürücü belgesi geri alınmışken araç kullanmak", tutar: 18679, adli: "Adli Tahkikat / Mahkeme Sevk", puan: 20 },
+                { metin: "Madde 37 - Sürücü belgesi iptal edilmiş kişilerin araç kullanmasına izin vermek", tutar: 18679, adli: "İdari Para Cezası", puan: 20 },
+                { metin: "Madde 38 - Sürücü kursu dışı yetkisiz kişilere direksiyon eğitimi vermek", tutar: 2167, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 39/1-a - Sürücü belgesi sınıfına uygun olmayan motorlu araç kullanmak", tutar: 9267, adli: "Araç Trafikten Men", puan: 20 },
+                { metin: "Madde 39/2 - Aday sürücülük kurallarına uymayarak belgesi iptal edilecek ihlal yapmak", tutar: 2167, adli: "Belge İptal İşlemi", puan: 15 },
+                { metin: "Madde 40 - Yaş ve sağlık şartlarına uymayan sürücü belgesiyle araç kullanmak", tutar: 2167, adli: "İdari Para Cezası", puan: 10 }
+            ],
+            "--- KTK MADDE 41 - 60: SEYİR, HIZ VE TRAFİK KURALLARI ---": [
+                { metin: "Madde 46/2-a - Trafik işaretlerine, levhalarına ve yer işaretlemelerine uymamak", tutar: 690, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 46/2-b - Aksine bir işaret yoksa şerit izleme kurallarına uymamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 46/2-c - Sol şeridi sürekli ve gereksiz işgal etmek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 46/2-d - Tehlikeli tarzda art arda şerit değiştirmek (Makas atmak)", tutar: 9267, adli: "Trafik Güvenliğini Tehlikeye Sokma", puan: 20 },
+                { metin: "Madde 46/2-e - Kamyon ve çekicilerin yasak sollama yapması", tutar: 2167, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 46/2-f - Otoyollarda emniyet şeridini gereksiz veya izinsiz kullanmak", tutar: 9267, adli: "İdari Para Cezası", puan: 20 },
+                { metin: "Madde 46/2-g - Bölünmüş karayollarında ters yönde araç sürmek", tutar: 9267, adli: "Trafikten Men Riski", puan: 20 },
+                { metin: "Madde 47/1-a - Trafik görevlilerinin ikaz ve işaretlerine uymamak", tutar: 2167, adli: "İdari Para Cezası", puan: 20 },
                 { metin: "Madde 47/1-b - Kırmızı ışık kuralına ve trafik ışık işaretlerine uymamak", tutar: 2167, adli: "1 Yılda 3 Defa Tekrarda Ehliyet İptali", puan: 20 },
+                { metin: "Madde 47/1-c - Yeşil ışık yanmasına rağmen geçiş yapmayan veya korna çalan trafiği engellemek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
                 { metin: "Madde 48/5 - 0.50 promil üzerinde alkollü araç kullanmak (1. Defa)", tutar: 9267, adli: "6 Ay Sürücü Belgesine El Koyma", puan: 20 },
                 { metin: "Madde 48/5-2 - 0.50 promil üzerinde alkollü araç kullanmak (2. Defa)", tutar: 11622, adli: "2 Yıl Sürücü Belgesine El Koyma", puan: 20 },
+                { metin: "Madde 48/5-3 - 0.50 promil üzerinde alkollü araç kullanmak (3 ve sonraki)", tutar: 18679, adli: "5 Yıl Sürücü Belgesine El Koyma", puan: 20 },
+                { metin: "Madde 48/6 - Hususi otomobillerde 0.50 promil, diğer araçlarda 0.20 promil üstü alkollü olmak", tutar: 9267, adli: "Sürücü Belgesi Geri Alma", puan: 20 },
                 { metin: "Madde 48/8 - Uyuşturucu veya uyarıcı madde etkisi altındayken araç kullanmak", tutar: 47842, adli: "5 Yıl Ehliyet İptali + TCK 179 Sevk", puan: 20 },
-                { metin: "Madde 48/9 - Alkol/uyuşturucu tespit cihazını üflemeyi/ölçümü reddetmek", tutar: 26615, adli: "2 Yıl Sürücü Belgesine El Koyma", puan: 20 },
-                { metin: "Madde 51/2-a - Hız sınırlarını %10'dan %30'a kadar aşmak", tutar: 2167, adli: "Yok", puan: 10 },
-                { metin: "Madde 51/2-b - Hız sınırlarını %30'dan %50'ye kadar aşmak", tutar: 4514, adli: "Yok", puan: 15 },
+                { metin: "Madde 48/9 - Alkol veya uyuşturucu tespit cihazını üflemeyi / ölçümü reddetmek", tutar: 26615, adli: "2 Yıl Sürücü Belgesine El Koyma", puan: 20 },
+                { metin: "Madde 49/3 - Ticari araçlarda günlük çalışma ve dinlenme sürelerine (takograf) uymamak", tutar: 2167, adli: "Seferden Men", puan: 15 },
+                { metin: "Madde 50/1 - Hava, yol ve trafik durumuna göre hızını ayarlamamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 51/2-a - Hız sınırlarını %10'dan %30'a kadar aşmak", tutar: 2167, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 51/2-b - Hız sınırlarını %30'dan %50'ye kadar aşmak", tutar: 4514, adli: "İdari Para Cezası", puan: 15 },
                 { metin: "Madde 51/2-c - Hız sınırlarını %50'den fazla aşmak (Aşırı Hız)", tutar: 9267, adli: "1 Yılda 5 Kere Tekrarda Ehliyet İptali", puan: 15 },
-                { metin: "Madde 52/1-c - Takip mesafesi ihlali (Önündeki aracı yakın takip)", tutar: 993, adli: "Yok", puan: 10 },
-                { metin: "Madde 57/1-f - Geçiş üstünlüğü olan araca (ambulans/itfaiye) yol vermemek", tutar: 993, adli: "Yok", puan: 15 },
-                { metin: "Madde 61/1-n - Engelli araçları için ayrılmış park yerine park etmek", tutar: 1986, adli: "Çekici ve Otopark Ücreti Hariç", puan: 10 },
-                { metin: "Madde 67/1-c - Karayolunda el freni çekmek, drift/spin atmak", tutar: 46392, adli: "60 Gün Ehliyet Geri Alma + Men", puan: 20 },
-                { metin: "Madde 73/c - Seyir halinde cep telefonu kullanmak", tutar: 2167, adli: "Yok", puan: 10 },
-                { metin: "Madde 74/a - Yaya geçidinde yayaya ilk geçiş hakkını vermemek", tutar: 4514, adli: "Yok", puan: 20 },
-                { metin: "Madde 78/1-a - Emniyet kemeri takmamak", tutar: 993, adli: "Yok", puan: 15 },
-                { metin: "Madde 78/1-b - Motosiklette kask/koruma başlığı takmamak", tutar: 993, adli: "Yok", puan: 15 },
-                { metin: "Madde 91 - Zorunlu Mali Mesuliyet (Trafik) Sigortası yaptırmamak", tutar: 993, adli: "Araç Bağlama ve Trafikten Men", puan: 10 }
+                { metin: "Madde 52/1-a - Araçlar arasındaki mesafeyi (takip mesafesi) korumamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 52/1-b - Kol veya kollarla dönüş işaretleri vermeden ani manevra yapmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 52/1-c - Önündeki aracı yakın takip etmek ve sıkıştırmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 53/1-a - Kavşaklarda geçiş hakkı kurallarına uymamak", tutar: 993, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 54/1 - Öndeki aracı sağdan veya hatalı sollamak", tutar: 2167, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 55 - Dar yollarda karşıdan gelen araçlara geçiş kolaylığı sağlamamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 56/1-a - Dönemeçlerde ve tepe üstlerinde önündeki aracı geçmek (hatalı sollama)", tutar: 2167, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 56/1-b - Görüşün kısıtlı olduğu yerlerde tünel ve köprülerde öndeki aracı geçmek", tutar: 2167, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 57/1-f - Geçiş üstünlüğü olan ambulans, itfaiye ve polis araçlarına yol vermemek", tutar: 993, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 59 - Okul taşıtlarının 'DUR' işaretini yaktığı halde sollamak veya geçmek", tutar: 2167, adli: "İdari Para Cezası", puan: 20 },
+                { metin: "Madde 60 - Demiryolu hemzemin geçitlerinde kurallara uymamak", tutar: 2167, adli: "İdari Para Cezası", puan: 20 }
+            ],
+            "--- KTK MADDE 61 - 85: DURMA, DURAKLAMA, PARK VE YAYA KURALLARI ---": [
+                { metin: "Madde 61/1-a - Taşıt yolu üzerinde yasak olan yerlerde duraklamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 61/1-b - Taşıt yolu üzerinde park etmek yasaklanan yerlere park etmek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 61/1-c - Taşıt yolu üzerinde çift sıra park etmek (İkinci sıra park)", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 61/1-d - Yangın musluklarına 5 metre mesafe içinde park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-e - Kamu binaları ve hastane giriş/çıkışlarına 15 metre mesafe içinde park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-f - Alt ve üst geçitler ile köprüler üzerinde park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-g - Kurum ve kuruluşların giriş/çıkış kapılarına 5 metre mesafe içinde park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-h - Duraklanan veya park edilen araçların çıkışına engel olacak şekilde park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-i - Yaya geçitleri ve okul geçitleri üzerine park etmek", tutar: 1986, adli: "Çekici ve Otopark Ücreti", puan: 10 },
+                { metin: "Madde 61/1-j - Bisiklet yolları ve şeritlerine park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-k - Belirlenmiş duraklara park etmek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 61/1-l - Yaya yolları ve kaldırımlar üzerine park etmek", tutar: 993, adli: "Çekici İşlemi", puan: 10 },
+                { metin: "Madde 61/1-m - Ücretli park yerlerine (İspark vb.) park edip ücret ödememek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 61/1-n - Engelli araçları için ayrılmış park yerine park etmek", tutar: 1986, adli: "Çekici ve 2 Kat Ceza", puan: 10 },
+                { metin: "Madde 62 - Park edilen araçların el frenini çekmeden veya stop etmeden bırakılması", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 63 - Gerekli güvenlik tedbirlerini (arka reflektör/üçgen reflektör) almadan durmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 64/1-a - Geceleyin şehir içinde park lambalarını yakmadan durmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 64/1-b - Sis farlarını sisli, karlı havalar dışında diğer zamanlarda yakmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 64/1-c - Uzun farları (akşam/gece) karşıdan gelen sürücülerin gözünü alacak şekilde yakmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 65/1 - Yükleme kurallarına uymamak (gabari dışı yükleme)", tutar: 4514, adli: "Yük İndirme + Para Cezası", puan: 15 },
+                { metin: "Madde 65/2 - Azami yüklü ağırlığı aşarak (tonaj fazlası) karayoluna çıkmak", tutar: 9267, adli: "Seferden Men", puan: 20 },
+                { metin: "Madde 66 - Bisiklet, motorlu bisiklet ve motosikletleri yaya yollarında sürmek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 67/1-a - Dönemeçlerde veya kavşaklarda hatalı şerit seçimi yapmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 67/1-b - Araçtan çöp, sigara izmariti veya eşya atmak", tutar: 993, adli: "Çevre Kanunu Ek Cezası", puan: 10 },
+                { metin: "Madde 67/1-c - Karayolunda el freni çekmek, drift veya spin atmak", tutar: 46392, adli: "60 Gün Ehliyet Geri Alma + Men", puan: 20 },
+                { metin: "Madde 68/1-a - Yayaların trafik kurallarına ve ışıklara uymaması", tutar: 690, adli: "İdari Para Cezası", puan: 0 },
+                { metin: "Madde 69 - Hayvan sürücülerinin karayolunda trafiği tehlikeye düşürmesi", tutar: 690, adli: "İdari Para Cezası", puan: 0 },
+                { metin: "Madde 71 - Otoyollarda mecburi asgari hız sınırının altında araç sürmek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 72 - Otoyollarda duraklamak, park etmek, mecburi haller dışında durmak", tutar: 2167, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 73/a - Sürüş esnasında dikkatini yola vermemek (sigara, yemek, makyaj)", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 73/b - Araç sürerken kulaklıkla müzik dinlemek veya yüksek sesle yayın yapmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 73/c - Seyir halinde cep telefonu veya benzer iletişim cihazı kullanmak", tutar: 2167, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 74/a - Yaya ve okul geçitlerinde yayalara ilk geçiş hakkını vermemek", tutar: 4514, adli: "İdari Para Cezası", puan: 20 },
+                { metin: "Madde 75 - Okul taşıtlarında 'DUR' lambasını yakmadan öğrenci indirmek/bindirmek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 78/1-a - Emniyet kemeri bulundurulması zorunlu araçlarda kemer takmamak", tutar: 993, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 78/1-b - Motosiklet ve motorlu bisikletlerde kask / koruma başlığı takmamak", tutar: 993, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 79 - Motorlu bisiklet ve motosikletlerde koruma gözlüğü takmamak", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 81/1-a - Trafik kazası yerini terk etmek ve kaza mahalline polise bildirmemek", tutar: 4514, adli: "Ehliyet Geçici Geri Alma", puan: 20 },
+                { metin: "Madde 81/1-b - Maddi hasarlı trafik kazasında durmayıp olay yerinden uzaklaşmak", tutar: 2167, adli: "İdari Para Cezası", puan: 20 },
+                { metin: "Madde 84 - Kusurlu olarak yaralamalı veya maddi hasarlı kazaya sebebiyet vermek", tutar: 2167, adli: "Kaza Tespit Tutanağına Göre", puan: 20 },
+                { metin: "Madde 91 - Zorunlu Mali Mesuliyet (Trafik) Sigortası yaptırmamış olmak", tutar: 993, adli: "Araç Men + Otopark", puan: 10 }
+            ],
+            "--- KTK MADDE 90 - 130: DİĞER ÖZEL İDARİ VE DENETİM MADDELERİ ---": [
+                { metin: "Madde 92 - Karayolları Motorlu Araçlar Zorunlu Sigorta poliçesini ibraz edememek", tutar: 993, adli: "İdari Para Cezası", puan: 10 },
+                { metin: "Madde 95 - Karayolu taşıma kanununa aykırı yolcu taşımak (K Yetki Belgesiz)", tutar: 9267, adli: "Ticari Faaliyetten Men", puan: 20 },
+                { metin: "Madde 101 - Araçlarda takograf bulundurmamak veya faal hale getirmemek", tutar: 4514, adli: "Seferden Men", puan: 15 },
+                { metin: "Madde 105 - Tehlikeli madde taşıyan araçların kurallara uymaması", tutar: 9267, adli: "İdari Para Cezası", puan: 20 },
+                { metin: "Madde 116 - Plakaya yazılan trafik idari para cezası tebligat kurallarına uymamak", tutar: 0, adli: "Vergi Dairesi Takibi", puan: 0 },
+                { metin: "Madde 118 - Sürücü belgesi puan aşımı nedeniyle 100 ceza puanını doldurmak", tutar: 2167, adli: "2 Ay Sürücü Belgesi Geri Alma", puan: 20 },
+                { metin: "Madde 123 - Karayolu üzerinde izsiz, hurda veya terk edilmiş araç bırakmak", tutar: 4514, adli: "Çekici ile Otoparka Kaldırma", puan: 10 },
+                { metin: "Madde 128 - Denetimle görevli yetkili personelin dur ikazına uymamak (İhtar", tutar: 2167, adli: "Kovuşturma + Para Cezası", puan: 20 },
+                { metin: "Madde 129 - Yetkisiz kişilerin trafik düzenlemesi yapması veya dur işareti kullanması", tutar: 2167, adli: "İdari Para Cezası", puan: 15 },
+                { metin: "Madde 130 - Trafik güvenliğini tehlikeye düşürecek şekilde hayvan otlatmak veya bırakmak", tutar: 993, adli: "İdari Para Cezası", puan: 10 }
             ]
         };
 
@@ -2988,7 +3179,7 @@
                 baslik.innerText = "POL-NET / MERNİS VATANDAŞ GBT & KİMLİK SORGULAMA SİSTEMİ";
                 icerik.innerHTML = `
                     <div style="display:flex; flex-direction:column; gap:10px;">
-                        <span style="font-size:12.5px; font-weight:bold; color:#f1f1f1;">T.C. Kimlik Numarası (11 Hane) veya İsim Soyisim Giriniz:</span>
+                        <span style="font-size:12.5px; font-weight:bold; color:#000000;">T.C. Kimlik Numarası (11 Hane) veya İsim Soyisim Giriniz:</span>
                         <div class="form-satir" style="margin-bottom:8px;">
                             <input type="text" id="gbt-input" class="gri-input" placeholder="T.C. Kimlik No Giriniz" maxlength="25" autocomplete="off" style="font-size:16px; font-weight:bold; letter-spacing:1px;">
                             <button class="gri-btn" style="height:44px; padding:0 24px;" onclick="sorgulaVatandas()">MERNİS SORGULA</button>
@@ -3394,33 +3585,132 @@
             }
         }
 
-        function cezaPaneliniYukle(otomatikMuhatap = "") {
+       function cezaPaneliniYukle(otomatikMuhatap = "") {
             const baslik = document.getElementById('ekran-baslik');
             const icerik = document.getElementById('ekran-icerik');
-            baslik.innerText = "CEZA MAKBUZU OLUŞTUR";
+            baslik.innerText = "CEZA TUTANAĞI DÜZENLE";
+
+            icerik.innerHTML = `
+                <div style="display:flex; flex-direction:column; gap:14px; max-width:700px;">
+                    <div style="font-size:14px; font-weight:bold; color:#111; margin-bottom:4px;">İşlem Türü Seçiniz:</div>
+                    <div style="display:flex; gap:12px;">
+                        <button class="gri-btn" style="flex:1; height:50px; background:#1d3898;" onclick="cezaFormunuAc('arac')">Araç Plakasına Ceza Gir</button>
+                        <button class="gri-btn" style="flex:1; height:50px; background:#1d3898;" onclick="cezaFormunuAc('vatandas')">T.C. Kimlik Numarasına Ceza Gir</button>
+                    </div>
+                </div>
+                <div id="panel-sonuc"></div>
+            `;
+        }
+
+        function cezaFormunuAc(tur) {
+            const baslik = document.getElementById('ekran-baslik');
+            const icerik = document.getElementById('ekran-icerik');
+            
+            let etiketAdi = (tur === 'arac') ? "Araç Plakası Giriniz:" : "T.C. Kimlik Numarası Giriniz:";
+            let placeholderAdi = (tur === 'arac') ? "Örn: 34 PGV 319" : "11 Haneli T.C. Kimlik No";
+            baslik.innerText = (tur === 'arac') ? "ARAÇ PLAKASINA CEZA DÜZENLE" : "T.C. KİMLİK NUMARASINA CEZA DÜZENLE";
+
+            icerik.innerHTML = `
+                <div style="display:flex; flex-direction:column; gap:12px; max-width:700px;">
+                    <button onclick="cezaPaneliniYukle()" style="background:none; border:none; color:#1d3898; font-weight:bold; cursor:pointer; text-align:left; padding:0; margin-bottom: -5px;">← Geri Dön (İşlem Tipi Seçimi)</button>
+                    
+                    <label style="font-size:13px; font-weight:bold; color:#000000;">${etiketAdi}</label>
+                    <input type="text" id="ceza-sahis" class="gri-input" style="max-width:100%;" placeholder="${placeholderAdi}" value="">
+                    
+                    <button class="gri-btn" style="background-color: #1d3898; height:45px; margin-top: 6px;" onclick="cezaMaddeleriniGoster()">SİSTEME GİR</button>
+                </div>
+                <div id="panel-sonuc"></div>
+            `;
+        }
+
+        function cezaMaddeleriniGoster() {
+            const girilenDeger = document.getElementById('ceza-sahis').value.trim();
+            if (!girilenDeger) {
+                alert("Lütfen ilgili alanın girişini yapınız.");
+                return;
+            }
 
             let cezaSecenekleriHTML = "";
             for (const grupAdi in cezaVeritabani) {
                 cezaSecenekleriHTML += `<optgroup label="${grupAdi}">`;
                 cezaVeritabani[grupAdi].forEach((madde, index) => {
-                    cezaSecenekleriHTML += `<option value="${grupAdi}___${index}">${madde.metin}</option>`;
+                    cezaSecenekleriHTML += `<option value="${grupAdi}___${index}">${madde.metin} (${madde.tutar > 0 ? madde.tutar.toLocaleString('tr-TR') + ' TL' : 'Adli İşlem'})</option>`;
                 });
                 cezaSecenekleriHTML += `</optgroup>`;
             }
 
-            icerik.innerHTML = `
-                <div style="display:flex; flex-direction:column; gap:12px; max-width:700px;">
-                    <label style="font-size:13px; font-weight:bold; color:#f1f1f1;">Muhatap Bilgisi:</label>
-                    <input type="text" id="ceza-sahis" class="gri-input" style="max-width:100%;" placeholder="Kişi TC / Araç Plakası" value="${otomatikMuhatap}">
-                    
-                    <label style="font-size:13px; font-weight:bold; color:#f1f1f1;">İhlal Edilen TCK / KTK Trafik Maddesi:</label>
-                    <select id="ceza-sebep" class="mavi-select-bar">
-                        ${cezaSecenekleriHTML}
-                    </select>
-                    
-                    <button class="gri-btn" style="background-color:#e00000; height:45px; margin-top:6px;" onclick="cezaKes()">CEZA TUTANAĞI DÜZENLE</button>
+            const simdi = new Date();
+            const tarihStr = `${String(simdi.getDate()).padStart(2,'0')}.${String(simdi.getMonth()+1).padStart(2,'0')}.${simdi.getFullYear()} - ${document.getElementById('saat-kutusu').innerText}`;
+
+            const sonucAlani = document.getElementById('panel-sonuc');
+            sonucAlani.innerHTML = `
+                <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 16px; margin-top: 15px; font-size: 13px;">
+                    <div style="font-weight: 800; color: #0f225e; border-bottom: 2px solid #0f225e; padding-bottom: 6px; margin-bottom: 12px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
+                        <span>📋 Resmî Tutanak Veri Giriş ve Denetim Paneli</span>
+                        <span style="font-size: 11px; background: #1d3898; color: #fff; padding: 2px 6px; border-radius: 3px;"></span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label style="font-weight: bold; color: #334155; display: block; margin-bottom: 4px;">Tanzim Tarihi / Saati:</label>
+                            <input type="text" class="gri-input" style="width: 100%; max-width: 100%; background: #e2e8f0; font-weight: bold; color: #111;" value="${tarihStr}" readonly>
+                        </div>
+                        <div>
+                            <label style="font-weight: bold; color: #334155; display: block; margin-bottom: 4px;">Görevli Ekip / Sicil:</label>
+                            <input type="text" class="gri-input" style="width: 100%; max-width: 100%; background: #e2e8f0; font-weight: bold; color: #111;" value="34-A-14 / Sicil: 489214" readonly>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-weight: bold; color: #334155; display: block; margin-bottom: 4px;">Muhatap (Plaka / T.C. Kimlik):</label>
+                        <input type="text" class="gri-input" style="width: 100%; max-width: 100%; background: #e2e8f0; font-weight: bold; color: #b91c1c;" value="${girilenDeger.toUpperCase()}" readonly>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-weight: bold; color: #334155; display: block; margin-bottom: 4px;">İhlal Edilen TCK / KTK Trafik Maddesi (${Object.values(cezaVeritabani).flat().length} Seçenek):</label>
+                        <select id="ceza-sebep" class="mavi-select-bar" style="width: 100%;">
+                            ${cezaSecenekleriHTML}
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 14px;">
+                        <label style="font-weight: bold; color: #334155; display: block; margin-bottom: 4px;">Olay Yeri / Güzergah Açıklaması (Opsiyonel):</label>
+                        <input type="text" id="ceza-aciklama" class="gri-input" style="width: 100%; max-width: 100%;"">
+                    </div>
+
+                    <button class="gri-btn" style="background-color:#e00000; width:100%; height:48px; font-size:15px; font-weight:bold; border-radius:3px; cursor:pointer;" onclick="cezaKes()">
+                        🚨 RESMİ CEZA TUTANAĞINI ONAYLA VE OLUŞTUR
+                    </button>
                 </div>
-                <div id="panel-sonuc"></div>
+            `;
+        }
+
+        function cezaKes() {
+            const shs = document.getElementById('ceza-sahis').value.trim() || "34 PLK 34";
+            const val = document.getElementById('ceza-sebep').value;
+            const [g, idx] = val.split("___");
+            const mad = cezaVeritabani[g][parseInt(idx)];
+            const seri = "TR-" + Math.floor(100000 + Math.random() * 900000);
+            const tutarStr = mad.tutar > 0 ? mad.tutar.toLocaleString('tr-TR') + " TL" : "Adli Sevk";
+
+            sonKesilenCeza = { 
+                sahis: shs, 
+                madde: mad.metin, 
+                tutar: tutarStr, 
+                adli: mad.adli, 
+                puan: mad.puan, 
+                seriNo: seri, 
+                tarihSaat: new Date().toLocaleString() 
+            };
+
+            document.getElementById('panel-sonuc').innerHTML = `
+                <div class="sonuc-kutusu" style="border-left:5px solid #e00000; margin-top:15px;">
+                    <h4 style="color:#e00000; margin-bottom:6px;">TUTANAK OLUŞTURULDU (${seri})</h4>
+                    <p><strong>Muhatap:</strong> ${shs}</p>
+                    <p><strong>Madde:</strong> ${mad.metin}</p>
+                    <p><strong>Tutar:</strong> <span style="color:#b10000; font-weight:bold;">${tutarStr}</span></p>
+                    <button class="gri-btn" style="margin-top:10px; background:#1d3898;" onclick="pdfGoster()">📄 PDF ÖNİZLEME & YAZDIR</button>
+                </div>
             `;
         }
 
@@ -3571,55 +3861,42 @@
         }
 
         function cezaKes() {
-            const sahis = document.getElementById('ceza-sahis').value.trim() || "34 TST 9999 / TC: BİLİNMİYOR";
-            const secilenDeger = document.getElementById('ceza-sebep').value;
-            const [grup, index] = secilenDeger.split("___");
-            const secilenMadde = cezaVeritabani[grup][parseInt(index)];
+            const shs = document.getElementById('ceza-sahis').value.trim().toUpperCase() || "34 PLK 34";
+            const val = document.getElementById('ceza-sebep').value;
+            const [g, idx] = val.split("___");
+            const mad = cezaVeritabani[g][parseInt(idx)];
+            const seri = "TR-" + Math.floor(100000 + Math.random() * 900000);
+            const tutarStr = mad.tutar > 0 ? mad.tutar.toLocaleString('tr-TR') + " TL" : "ADLİ SEVK (Mahkemece Takdir Edilecek)";
 
-            const seriNo = "TR-" + Math.floor(100000 + Math.random() * 900000);
-            const tarihSaat = `${new Date().toLocaleDateString('tr-TR')} - ${document.getElementById('saat-kutusu').innerText}`;
-
-            let tutarMetni = "";
-            let indirimMetni = "";
-
-            if (secilenMadde.tutar > 0) {
-                const indirimliTutar = (secilenMadde.tutar * 0.75).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                const netTutar = secilenMadde.tutar.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                tutarMetni = `${netTutar} TL`;
-                indirimMetni = `(1 Ay İçinde Peşin Ödenirse %25 İndirimli: <strong>${indirimliTutar} TL</strong>)`;
-            } else {
-                tutarMetni = "ADLİ SEVK (Mahkemece Takdir Edilecek)";
-                indirimMetni = "(Hapis ve Adli Para Cezası Kapsamındadır)";
-            }
-
-            sonKesilenCeza = {
-                sahis: sahis,
-                madde: secilenMadde.metin,
-                tutar: tutarMetni,
-                indirim: indirimMetni,
-                adli: secilenMadde.adli,
-                puan: secilenMadde.puan,
-                seriNo: seriNo,
-                tarihSaat: tarihSaat
+            sonKesilenCeza = { 
+                sahis: shs, 
+                madde: mad.metin, 
+                tutar: tutarStr, 
+                adli: mad.adli, 
+                puan: mad.puan, 
+                seriNo: seri, 
+                tarihSaat: `${document.getElementById('saat-kutusu').innerText} - 20.09.2026` 
             };
 
             document.getElementById('panel-sonuc').innerHTML = `
-                <div class="sonuc-kutusu" style="border-left: 5px solid #e00000;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ddd; padding-bottom:6px; margin-bottom:8px;">
-                        <h4 style="color:#e00000; margin:0;">TRAFİK İDARİ PARA CEZASI / ADLİ İŞLEM TUTANAĞI</h4>
-                        <span style="font-size:12px; font-weight:bold; color:#666;">Seri No: ${seriNo}</span>
+                <div class="sonuc-kutusu" style="border-left: 5px solid #e00000; margin-top: 15px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ddd; padding-bottom:8px; margin-bottom:10px;">
+                        <span style="color:#e00000; font-weight:bold; font-size:14px;">TRAFİK İDARİ PARA CEZASI / ADLİ İŞLEM TUTANAĞI</span>
+                        <span style="font-family:monospace; font-weight:bold; color:#333;">Seri No: ${seri}</span>
                     </div>
-                    <p><strong>Kişi TC / Araç Plakası:</strong> ${sahis}</p>
-                    <p><strong>Uygulanan Madde:</strong> ${secilenMadde.metin}</p>
-                    <p><strong>Uygulanan Ceza Puanı:</strong> ${secilenMadde.puan} Puan</p>
-                    <p style="font-size:15px; margin: 4px 0;"><strong>Toplam Ceza Tutarı:</strong> <span style="color:#b10000; font-weight:bold; font-size:16px;">${tutarMetni}</span> <span style="font-size:12px; color:#555;">${indirimMetni}</span></p>
-                    <p><strong>Yasal Hüküm / Yaptırım:</strong> ${secilenMadde.adli}</p>
-                    <p><strong>Düzenlenme Zamanı:</strong> ${tarihSaat}</p>
                     
-                    <div style="margin-top:14px; display:flex; gap:10px;">
-                        <button onclick="pdfGoster()" style="background-color:#1d3898; color:#fff; border:none; padding:9px 18px; font-weight:bold; cursor:pointer; font-size:13px; border-radius:3px; display:flex; align-items:center; gap:6px;">
-                            📄 PDF OLARAK GÖRÜNTÜLE & YAZDIR
-                        </button>
+                    <p style="margin-bottom:6px;"><strong>Kişi TC / Araç Plakası:</strong> ${shs}</p>
+                    <p style="margin-bottom:6px;"><strong>Uygulanan Madde:</strong> ${mad.metin}</p>
+                    <p style="margin-bottom:6px;"><strong>Uygulanan Ceza Puanı:</strong> ${mad.puan} Puan</p>
+                    <p style="margin-bottom:6px;"><strong>Toplam Ceza Tutarı:</strong> <span style="color:#b10000; font-weight:bold;">${tutarStr}</span></p>
+                    <p style="margin-bottom:6px;"><strong>Yasal Hüküm / Yaptırım:</strong> ${mad.adli}</p>
+                    <p style="margin-bottom:14px;"><strong>Düzenlenme Zamanı:</strong> 20.09.2026 - ${document.getElementById('saat-kutusu').innerText}</p>
+
+                    <!-- BÜYÜK, SİMGESİZ VE TAMAMEN POLNET LACİVERTİ BUTONLAR -->
+                    <div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+                        <button class="gri-btn" style="background: #1d3898; flex: 1; height: 52px; font-size: 14px; font-weight: bold; border-radius: 4px;" onclick="pdfGoster()">Ceza Makbuzunu Görüntüle</button>
+                        <button class="gri-btn" style="background: #1d3898; flex: 1; height: 52px; font-size: 14px; font-weight: bold; border-radius: 4px;" onclick="window.print()">Ceza Makbuzunu Yazdır</button>
+                        <button class="gri-btn" style="background: #1d3898; flex: 1; height: 52px; font-size: 14px; font-weight: bold; border-radius: 4px;" onclick="alert('Ceza tutanağı Pol-Net sistemine başarıyla onaylanarak kaydedildi.')">Kaydet</button>
                     </div>
                 </div>
             `;
@@ -3690,7 +3967,7 @@
                     </div>
                     <div class="imza-alani">
                         <strong>DÜZENLEYEN GÖREVLİ</strong><br>
-                        Sicil No: 489214<br>
+                        Sicil No: 652876<br>
                         İmza / E-İmza:<br>
                         <em>[Elektronik Olarak İmzalanmıştır]</em>
                     </div>
