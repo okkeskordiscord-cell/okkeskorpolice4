@@ -1325,7 +1325,7 @@ margin-top: -45px;
     </div>
 
     <div class="ana-alan">
-        <div class="ana-baslik">HIZLI İŞLEMLER</div>
+        <div class="ana-baslik"></div>
 
         <div class="govde-yerlesim">
             <div class="butonlar">
@@ -1578,8 +1578,8 @@ function aracSorgulamaPaneliYukle(butonEl) {
 
         function varsayilanaDon() {
             butonSeciminiGuncelle(null);
-            document.getElementById('ekran-baslik').innerText = "SİSTEM HAZIR";
-            document.getElementById('ekran-icerik').innerHTML = "<p style='color: #ddd;'>İşlem yapmak için soldaki menüden seçim yapınız.</p>";
+            document.getElementById('ekran-baslik').innerText = "";
+            document.getElementById('ekran-icerik').innerHTML = "<p style='color: #ddd;'></p>";
         }
 
         function metinGoster(baslik, icerik, butonEl) {
