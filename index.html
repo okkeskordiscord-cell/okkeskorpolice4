@@ -1329,8 +1329,8 @@ margin-top: -45px;
 
         <div class="govde-yerlesim">
             <div class="butonlar">
-                <button class="buton" id="btn-vatandas" onclick="panelGoster('vatandas', this)">VATANDAŞ SORGULAMA</button>
-                <button class="buton" id="btn-arac" onclick="panelGoster('arac', this)">ARAÇ SORGULAMA</button>
+                <button class="buton" id="btn-vatandas" onclick="panelGoster('vatandas', this)">VATANDAŞ İŞLEMLERİ</button>
+                <button class="buton" id="btn-arac" onclick="aracSorgulamaPaneliYukle(this)">ARAÇ SORGULAMA</button>
 <!-- DİĞER BUTONLARLA AYNI BOYUT VE YAPIDA BEYAZ ARAMA KUTUSU -->
 <div style="width: 229px; height: 52px; background-color: #ffffff; border: 2px solid #1d3898; display: flex; align-items: center; justify-content: center; margin: 2.5px 0; border-radius: 0px; box-sizing: border-box; padding: 0 10px;">
     <input type="text" id="akilli-input" placeholder="" style="width: 100%; border: none; outline: none; background: transparent; font-size: 14px; font-weight: bold; text-align: center; text-transform: uppercase; color: #111;" autocomplete="off" oninput="akilliSorgula(this.value)">
@@ -1368,33 +1368,39 @@ margin-top: -45px;
 
     <script>
 
-function aracSorgulamaPaneliYukle() {
+function aracSorgulamaPaneliYukle(butonEl) {
+            if (butonEl) butonSeciminiGuncelle(butonEl);
             const baslik = document.getElementById('ekran-baslik');
             const icerik = document.getElementById('ekran-icerik');
             if (baslik) baslik.innerText = "ARAÇ SORGULAMA İŞLEMİ";
 
             if (icerik) {
                 icerik.innerHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 14px; max-width: 650px;">
+                    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 650px;">
                         <div style="font-size: 14px; font-weight: bold; color: #111; margin-bottom: 2px;">Sorgulama Yöntemi Seçiniz:</div>
                         
-                        <button style="background-color: #0f225e; color: #ffffff; padding: 16px 20px; font-size: 15px; font-weight: bold; border: none; border-radius: 6px; text-align: left; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;" onclick="aracAltFormAc('plaka')">
-                            1. Tescil Plakası ile Sorgulama
-                        </button>
+                        <!-- ÜSTTE YAN YANA DURAN 2 BUTON -->
+                        <div style="display: flex; gap: 12px;">
+                            <button style="flex: 1; background-color: #0f225e; color: #ffffff; padding: 14px 15px; font-size: 14px; font-weight: bold; border: none; border-radius: 6px; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onclick="aracAltFormAc('plaka')">
+                                Tescil Plakası ile Sorgulama
+                            </button>
 
-                        <button style="background-color: #0f225e; color: #ffffff; padding: 16px 20px; font-size: 15px; font-weight: bold; border: none; border-radius: 6px; text-align: left; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;" onclick="aracAltFormAc('tc')">
-                            2. T.C. Kimlik Numarası ile Sorgulama
-                        </button>
+                            <button style="flex: 1; background-color: #0f225e; color: #ffffff; padding: 14px 15px; font-size: 14px; font-weight: bold; border: none; border-radius: 6px; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onclick="aracAltFormAc('tc')">
+                                T.C. Kimlik Numarası ile Sorgulama
+                            </button>
+                        </div>
 
-                        <button style="background-color: #0f225e; color: #ffffff; padding: 16px 20px; font-size: 15px; font-weight: bold; border: none; border-radius: 6px; text-align: left; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;" onclick="aracAltFormAc('karekod')">
-                            3. Karekod ile Sorgulama
-                        </button>
+                        <!-- ALTTA TEK BAŞINA DURAN 3. BUTON -->
+                        <div>
+                            <button style="width: 100%; background-color: #0f225e; color: #ffffff; padding: 14px 15px; font-size: 14px; font-weight: bold; border: none; border-radius: 6px; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onclick="aracAltFormAc('karekod')">
+                                Karekod ile Sorgulama
+                            </button>
+                        </div>
                     </div>
                     <div id="arac-alt-sonuc" style="margin-top: 20px;"></div>
                 `;
             }
         }
-
         function aracAltFormAc(tur) {
             const sonucDiv = document.getElementById('arac-alt-sonuc');
             if (!sonucDiv) return;
@@ -1405,7 +1411,7 @@ function aracSorgulamaPaneliYukle() {
                         <strong>Plaka ile Sorgulama:</strong>
                         <div style="display: flex; gap: 10px; margin-top: 10px;">
                             <input type="text" id="sorgu-plaka-input" placeholder="Örn: 34ABC123" style="flex: 1; padding: 10px; font-weight: bold; text-transform: uppercase; border: 1px solid #ccc; border-radius: 4px;">
-                            <button style="background: #0f225e; color: #fff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer;" onclick="alert('Plaka sorgulama başlatıldı.')">Sorgula</button>
+                            <button style="background: #0f225e; color: #fff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer;" onclick="sorgulaPlakaDisaridan()">Sorgula</button>
                         </div>
                     </div>
                 `;
@@ -1421,10 +1427,24 @@ function aracSorgulamaPaneliYukle() {
                 `;
             } else if (tur === 'karekod') {
                 sonucDiv.innerHTML = `
-                    <div style="background: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 6px; max-width: 650px; text-align: center;">
-                        <strong>Karekod Okuyucu / Kamera Aktif</strong>
-                        <div style="margin: 15px auto; width: 180px; height: 180px; border: 2px dashed #0f225e; display: flex; align-items: center; justify-content: center; background: #f9f9f9; color: #555; font-size: 13px; font-weight: bold;">
-                            [ KAREKOD TARANIYOR ]
+                    <div style="background: #111; padding: 20px; border-radius: 8px; max-width: 650px; color: #fff; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                        <div style="font-size: 14px; font-weight: bold; margin-bottom: 12px; color: #38bdf8; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>📷</span> İPAD KAMERA VİZÖRÜ - KAREKOD TARAYICI
+                        </div>
+                        
+                        <!-- IPAD KAMERA GÖRÜNTÜ ALANI VE LAZER TARAMA ÇİZGİSİ -->
+                        <div style="position: relative; margin: 0 auto; width: 280px; height: 180px; border: 2px solid #38bdf8; border-radius: 6px; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                            <!-- Kamera Arka Plan Simülasyonu / Canlı Tarama Izgarası -->
+                            <div style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0.8) 100%);"></div>
+                            
+                            <!-- Hareketli Lazer Çizgisi -->
+                            <div style="position: absolute; width: 80%; height: 2px; background: #ef4444; box-shadow: 0 0 8px #ef4444; animation: LazerAnimasyon 1.5s infinite alternate; top: 50%;"></div>
+                            
+                            <span style="position: relative; z-index: 2; font-size: 12px; color: #94a3b8; font-family: monospace;">[ KAREKODU ÇERÇEVEYE HİZALAYIN ]</span>
+                        </div>
+
+                        <div style="margin-top: 14px; font-size: 11.5px; color: #94a3b8;">
+                            Kamera sensörü aktif. Araç ruhsatındaki karekod taranıyor...
                         </div>
                     </div>
                 `;
@@ -3179,54 +3199,15 @@ function aracSorgulamaPaneliYukle() {
                 baslik.innerText = "POL-NET / MERNİS VATANDAŞ GBT & KİMLİK SORGULAMA SİSTEMİ";
                 icerik.innerHTML = `
                     <div style="display:flex; flex-direction:column; gap:10px;">
-                        <span style="font-size:12.5px; font-weight:bold; color:#000000;">T.C. Kimlik Numarası (11 Hane) veya İsim Soyisim Giriniz:</span>
+                        <span style="font-size:12.5px; font-weight:bold; color:#000000;">T.C. Kimlik Numarası veya İsim Soyisim Giriniz:</span>
                         <div class="form-satir" style="margin-bottom:8px;">
-                            <input type="text" id="gbt-input" class="gri-input" placeholder="T.C. Kimlik No Giriniz" maxlength="25" autocomplete="off" style="font-size:16px; font-weight:bold; letter-spacing:1px;">
-                            <button class="gri-btn" style="height:44px; padding:0 24px;" onclick="sorgulaVatandas()">MERNİS SORGULA</button>
+                            <input type="text" id="gbt-input" class="gri-input" placeholder="" maxlength="25" autocomplete="off" style="font-size:16px; font-weight:bold; letter-spacing:1px;">
+                            <button class="gri-btn" style="height:44px; padding:0 24px;" onclick="sorgulaVatandas()">SİSTEME GİR</button>
                         </div>
                     </div>
                     <div id="panel-sonuc"></div>
                 `;
-            } else if (tur === 'arac') {
-                baslik.innerText = "POL-NET PLAKA VE TESCİL SORGULAMA";
-
-                let ulkeSecenekleriHTML = "";
-                for (const kod in ulkePlakaStandartlari) {
-                    const u = ulkePlakaStandartlari[kod];
-                    ulkeSecenekleriHTML += `<option value="${kod}">${kod} - ${u.ad}</option>`;
-                }
-
-                icerik.innerHTML = `
-                    <div class="sorgu-filtre-satiri">
-                        <div class="sorgu-alan-kolonu">
-                            <span class="sorgu-etiket">Plaka No (Ülkeyi değiştirmek için sol mavi koda tıklayın):</span>
-                            
-                            <div class="dinamik-plaka-kapsayici" id="plakaKapsayici">
-                                <div class="plaka-sol-euroband" id="euroSolBant" title="Ülke değiştirmek için tıklayın">
-                                    <span class="euro-yildiz" id="euroYildiz">★</span>
-                                    <span class="euro-kod-metin" id="euroKodMetin">TR</span>
-                                    <select id="plakaUlkeSelect" class="ulke-secici-gizli" onchange="plakaUlkesiniGuncelle(this.value)">
-                                        ${ulkeSecenekleriHTML}
-                                    </select>
-                                </div>
-                                <input type="text" id="plaka-input" class="plaka-orta-girdi" placeholder="34 ABC 789" autocomplete="off">
-                                <div class="plaka-sag-bolge-bandi" id="plakaSagBant">
-                                    <span style="font-size:8px;">★</span>
-                                    <span id="plakaSagBantMetin">75</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sorgu-alan-kolonu">
-                            <span class="sorgu-etiket">Şasi Numarası (VIN / Opsiyonel):</span>
-                            <input type="text" id="sasi-input" class="sase-input" placeholder="WBA... (17 Hane)">
-                        </div>
-
-                        <button class="gri-btn" style="height:50px; padding:0 26px;" onclick="sorgulaPlaka()">POL-NET SORGULA</button>
-                    </div>
-                    <div id="panel-sonuc"></div>
-                `;
-            } else if (tur === 'ceza') {
+                        } else if (tur === 'ceza') {
                 cezaPaneliniYukle();
             } else if (tur === 'tutanak') {
                 baslik.innerText = "POL-NET RESMİ TUTANAK YÖNETİMİ & ARŞİV";
@@ -3234,8 +3215,8 @@ function aracSorgulamaPaneliYukle() {
                     <div class="kurumsal-kart">
                         <div class="kart-ust-bar">
                             <div>
-                                <span style="font-size:15px; font-weight:bold; color:#1d3898;">GÜNCEL TRAFİK VE ADLİ İŞLEM TUTANAKLARI</span><br>
-                                <span style="font-size:11px; color:#64748b;">DEVRİYE BİRİMİ: 34-A-14 | SİSTEM: E-TUTANAK V4.8</span>
+                                <span style="font-size:15px; font-weight:bold; color:#0f225e ;">GÜNCEL TRAFİK VE ADLİ İŞLEM TUTANAKLARI</span><br>
+                                <span style="font-size:11px; color:#0f225e ;">DEVRİYE BİRİMİ: 34-A-14 | SİSTEM: E-TUTANAK V4.8</span>
                             </div>
                             <button class="aksiyon-btn" style="background:#1d3898;" onclick="panelGoster('ceza', document.getElementById('btn-ceza'))">+ YENİ TUTANAK DÜZENLE</button>
                         </div>
@@ -3849,6 +3830,61 @@ function aracSorgulamaPaneliYukle() {
                         <button class="aksiyon-btn" style="background-color:#e00000;" onclick="aracaCezaBagla('${secilenUlkeKodu} ${hamPlaka || arac.sasi}')">🚨 BU ARACA CEZA DÜZENLE</button>
                         <button class="aksiyon-btn" style="background-color:#1d3898;" onclick="alert('${secilenUlkeKodu} ${hamPlaka || arac.sasi} plakalı araç için çekici ve men talebi onaylandı.')">🚜 ÇEKİCİ / TRAFİKTEN MEN TALEBİ</button>
                         <button class="aksiyon-btn" style="background-color:#555;" onclick="alert('Aracın Interpol ve gümrük tahkikat kayıtları devriye birimine iletildi.')">📡 INTERPOL / GÜMRÜK SORGULA</button>
+                    </div>
+                </div>
+            `;
+        }
+
+// YENİ EKLEYECEĞİN FONKSİYON TAM OLARAK BURADAN BAŞLAYACAK:
+        function sorgulaPlakaDisaridan() {
+            const inputEl = document.getElementById('sorgu-plaka-input');
+            const sonucAlani = document.getElementById('arac-alt-sonuc');
+            if (!inputEl || !sonucAlani) return;
+
+            let plaka = inputEl.value.trim().toUpperCase().replace(/\s+/g, '');
+            if (!plaka) {
+                alert("Lütfen bir plaka giriniz.");
+                return;
+            }
+
+            let arac = polnetAraclar[plaka];
+
+            if (!arac) {
+                sonucAlani.innerHTML = `<div style="background:#fff; color:#c00000; padding:15px; border-radius:6px; margin-top:10px; font-weight:bold;">Sistemde "${plaka}" plakasına ait kayıt bulunamadı.</div>`;
+                return;
+            }
+
+            sonucAlani.innerHTML = `
+                <div class="arac-karti" style="margin-top: 15px; background: #fff; padding: 15px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                    <div class="arac-karti-ust" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 12px;">
+                        <div style="display:inline-flex; align-items:center; border:2px solid #111; border-radius:4px; font-weight:800; font-size:17px; background:#fff; color:#111; overflow:hidden;">
+                            <span style="background:#003399; color:#fff; font-size:12px; padding:4px 7px;">TR</span>
+                            <span style="padding:4px 12px; font-family:monospace;">${plaka}</span>
+                        </div>
+                        <span class="rozet-yesil" style="background: #008000; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 12px;">TRAFİĞE UYGUN</span>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13.5px;">
+                        <div style="display: flex; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                            <span style="width: 35%; font-weight: bold; color: #333;">Marka / Model :</span>
+                            <span style="width: 65%; color: #111;"><strong>${arac.marka}</strong> - ${arac.model} (${arac.yil})</span>
+                        </div>
+                        <div style="display: flex; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                            <span style="width: 35%; font-weight: bold; color: #333;">Ruhsat Sahibi :</span>
+                            <span style="width: 65%; color: #111;"><strong>${arac.sahip}</strong></span>
+                        </div>
+                        <div style="display: flex; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                            <span style="width: 35%; font-weight: bold; color: #333;">Şasi Numarası :</span>
+                            <span style="width: 65%; font-family: monospace; color: #111;">${arac.sasi}</span>
+                        </div>
+                        <div style="display: flex; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                            <span style="width: 35%; font-weight: bold; color: #333;">Muayene Durumu :</span>
+                            <span style="width: 65%; color: #111;">${arac.muayene.bitis} (${arac.muayene.durum})</span>
+                        </div>
+                        <div style="display: flex; padding-top: 2px;">
+                            <span style="width: 35%; font-weight: bold; color: #333;">Sigorta / Şerh :</span>
+                            <span style="width: 65%; color: #b10000; font-weight: bold;">${arac.hukuki.not}</span>
+                        </div>
                     </div>
                 </div>
             `;
