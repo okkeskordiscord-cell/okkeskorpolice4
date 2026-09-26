@@ -312,16 +312,14 @@
         .amblem {
             width: 50px;
             height: 50px;
-            margin-left: 14px;
-            background-color: white;
-            border: 2px solid #dddddd;
-            border-radius: 50%;
+            background-color: transparent; /* Arka planı şeffaf yaptık */
+            border: none;                  /* Etrafındaki halkayı/çerçeveyi kaldırdık */
+            border-radius: 0;              /* Daire olma özelliğini kaldırdık */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
+            margin-left: 14px;
+            box-shadow: none;              /* Varsa gölgeyi kaldırdık */
         }
 
         .amblem img {
@@ -1313,13 +1311,13 @@ margin-top: -45px;
             <span>▴</span>
             <span>⌁</span>
             <span>▮</span>
-            <div class="batarya">87%</div>
+            <div class="batarya">44%</div>
         </div>
     </div>
 
     <div class="ust-bar">
         <div class="amblem">
-            <img src="https://upload.wikimedia.org/wikipedia/tr/2/2d/%C4%B0stanbul_Emniyet_M%C3%BCd%C3%BCrl%C3%BC%C4%9F%C3%BC_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original" alt="EGM Amblemi" style="width:100%; height:100%; object-fit:contain;">
+            <img src="solustlogo.png"" alt="EGM Amblemi" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <div class="ev" onclick="varsayilanaDon()">🏠</div>    
     </div>
@@ -1550,8 +1548,14 @@ function aracSorgulamaPaneliYukle(butonEl) {
             const parola = document.getElementById('girisParola').value.trim();
             const hataKutusu = document.getElementById('girisHataMesaji');
 
-            if (sicil === "652876" , "00" && parola === "476969" , "111111" , "343434" , "00") {
-                // Giriş ekranını gizle
+            // Doğru sicil ve parola eşleşmeleri (İstediğin kombinasyonları buraya ekleyebilirsin)
+            const dogruGiris = 
+                (sicil === "652876" && parola === "476969") ||
+                (sicil === "00" && (parola === "111111" || parola === "343434" || parola === "00"));
+
+            if (dogruGiris) {
+                // Hata mesajını temizle ve giriş ekranını gizle
+                hataKutusu.innerText = "";
                 document.getElementById('girisEkrani').style.display = 'none';
                 
                 // Doğrudan UTP / Uygulama Seçim Menüsünü göster
@@ -4043,7 +4047,7 @@ function aracSorgulamaPaneliYukle(butonEl) {
 
         <div class="ust-bar">
             <<div class="amblem">
-    <img src="https://upload.wikimedia.org/wikipedia/tr/2/2d/%C4%B0stanbul_Emniyet_M%C3%BCd%C3%BCrl%C3%BC%C4%9F%C3%BC_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original" alt="EGM Amblemi" style="width:100%; height:100%; object-fit:contain;">
+    <img src="solustlogo.png" alt="EGM Amblemi" style="width:100%; height:100%; object-fit:contain;">
 </div>
             <div class="ev" onclick="oturumuKapatMenu()" title="Oturumu Kapat" style="font-size:18px; color:#fff; display:flex; align-items:center; gap:6px; cursor:pointer;">
                 <span>🔒 Çıkış</span>
